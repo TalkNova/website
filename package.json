@@ -1,0 +1,8 @@
+{
+  "name": "thatmatter-admin-root",
+  "private": true,
+  "scripts": {
+    "dev": "npm --prefix admin-site start",
+    "start": "npm --prefix admin-site start"
+  }
+}
