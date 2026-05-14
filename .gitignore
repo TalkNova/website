@@ -1,0 +1,4 @@
+admin-site/.env
+admin-site/node_modules/
+admin-site/logs/
+admin-site/data/drafts.json
