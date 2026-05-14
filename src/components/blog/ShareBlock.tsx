@@ -1,11 +1,16 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { MessageCircle } from 'lucide-react';
+import { IconLinkedIn, IconX } from '@/components/icons/BrandIcons';
 
 type ShareBlockProps = {
   title: string;
   shareUrl: string;
 };
+
+const btn =
+  'inline-flex items-center gap-2 rounded-xl border border-white/15 bg-white/[0.04] px-4 py-2 text-sm font-medium text-slate-200 transition hover:border-wa/40 hover:text-white';
 
 export function ShareBlock({ title, shareUrl }: ShareBlockProps) {
   const [url, setUrl] = useState(shareUrl);
@@ -16,52 +21,36 @@ export function ShareBlock({ title, shareUrl }: ShareBlockProps) {
 
   return (
     <>
-      <hr
-        style={{
-          border: 0,
-          borderTop: '1px solid var(--glass-border)',
-          margin: '3rem 0',
-        }}
-      />
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          flexWrap: 'wrap',
-          gap: '1rem',
-        }}
-      >
-        <div>
-          <h4 style={{ marginBottom: '0.5rem' }}>Share this article</h4>
-        </div>
-        <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+      <hr className="my-12 border-white/[0.08]" />
+      <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
+        <h4 className="font-display text-sm font-semibold text-white">Share this article</h4>
+        <div className="flex flex-wrap gap-2">
           <a
             href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn btn-outline"
-            style={{ padding: '0.5rem 1rem', borderRadius: '10px' }}
+            className={btn}
           >
-            <i className="fa-brands fa-twitter" aria-hidden /> Twitter
+            <IconX className="h-4 w-4" />
+            X / Twitter
           </a>
           <a
             href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn btn-outline"
-            style={{ padding: '0.5rem 1rem', borderRadius: '10px' }}
+            className={btn}
           >
-            <i className="fa-brands fa-linkedin" aria-hidden /> LinkedIn
+            <IconLinkedIn className="h-4 w-4" />
+            LinkedIn
           </a>
           <a
             href={`https://wa.me/?text=${encodeURIComponent(`${title} ${url}`)}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn btn-outline"
-            style={{ padding: '0.5rem 1rem', borderRadius: '10px' }}
+            className={btn}
           >
-            <i className="fa-brands fa-whatsapp" aria-hidden /> WhatsApp
+            <MessageCircle className="h-4 w-4 text-wa" />
+            WhatsApp
           </a>
         </div>
       </div>

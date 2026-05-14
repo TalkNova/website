@@ -10,46 +10,43 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <PageShell blobs="about" navScrolled>
-      <header className="section" style={{ paddingTop: '150px', paddingBottom: '50px' }}>
-        <div className="container text-center animate-on-scroll fade-up">
-          <h1 style={{ fontSize: 'clamp(2rem, 5vw, 3rem)' }}>
-            Our <span className="text-gradient">Mission</span>
+      <header className="px-4 pb-12 pt-28 text-center sm:px-6 lg:px-8 lg:pt-32">
+        <div className="mx-auto max-w-3xl">
+          <h1 className="font-display text-4xl font-bold text-white sm:text-5xl">
+            Our <span className="text-gradient-wa">Mission</span>
           </h1>
-          <p
-            className="text-secondary"
-            style={{ maxWidth: '600px', margin: '0 auto', fontSize: '1.2rem' }}
-          >
+          <p className="mx-auto mt-4 max-w-xl text-lg text-slate-400">
             Bridging the gap between businesses and customers through seamless WhatsApp integration.
           </p>
         </div>
       </header>
 
-      <section className="section">
-        <div className="container">
-          <div className="split-grid" style={{ alignItems: 'center' }}>
-            <div className="animate-on-scroll fade-right">
-              <Image
-                src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80"
-                alt="Team working"
-                width={800}
-                height={600}
-                sizes="(max-width: 992px) 100vw, 50vw"
-                style={{ borderRadius: '20px', boxShadow: 'var(--glass-shadow)' }}
-              />
-            </div>
-            <div className="animate-on-scroll fade-left">
-              <h2 className="mb-2">How It All Started</h2>
-              <p className="text-secondary mb-2">
-                We noticed that businesses were struggling to manage WhatsApp conversations.
-                Marketing campaigns were disconnected from support tickets, leading to a fragmented
-                customer experience.
-              </p>
-              <p className="text-secondary">
-                ThatMatter was built to solve this exact problem. By combining powerful marketing
-                automation with a robust ticketing system, we empower teams to deliver exceptional
-                service right where their customers already are.
-              </p>
-            </div>
+      <section className="px-4 py-16 sm:px-6 lg:px-8">
+        <div className="mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-2">
+          <div className="overflow-hidden rounded-3xl border border-white/[0.08] shadow-card">
+            <Image
+              src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80"
+              alt="Team working"
+              width={800}
+              height={600}
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              className="h-auto w-full object-cover"
+            />
+          </div>
+          <div>
+            <h2 className="font-display text-2xl font-bold text-white sm:text-3xl">
+              How it all started
+            </h2>
+            <p className="mt-4 text-slate-400">
+              We noticed that businesses were struggling to manage WhatsApp conversations. Marketing
+              campaigns were disconnected from support tickets, leading to a fragmented customer
+              experience.
+            </p>
+            <p className="mt-4 text-slate-400">
+              ThatMatter was built to solve this exact problem. By combining powerful marketing
+              automation with a robust ticketing system, we empower teams to deliver exceptional
+              service right where their customers already are.
+            </p>
           </div>
         </div>
       </section>

@@ -19,76 +19,72 @@ export function LoginForm() {
     }, 400);
   };
 
+  const input =
+    'w-full rounded-xl border border-white/10 bg-canvas/60 px-4 py-3 text-white outline-none transition focus:border-wa/50 disabled:opacity-50';
+
   return (
-    <div className="login-container animate-on-scroll zoom-in">
-      <div className="glass-card" style={{ padding: '3rem 2rem' }}>
-        <div className="text-center mb-4">
-          <Link
-            href="/"
-            className="logo"
-            style={{
-              justifyContent: 'center',
-              marginBottom: '1rem',
-              display: 'flex',
-            }}
-          >
-            <Image
-              src="/images/logo.png"
-              alt="ThatMatter Logo"
-              width={280}
-              height={100}
-              className="h-[100px] w-auto"
-              priority
-            />
-          </Link>
-          <h2 style={{ margin: 0 }}>Welcome Back</h2>
-          <p className="text-muted">Sign in to manage your campaigns</p>
-        </div>
-
-        <form onSubmit={onSubmit}>
-          <div className="form-group">
-            <label htmlFor="username">Username</label>
-            <input
-              id="username"
-              name="username"
-              type="text"
-              className="form-control"
-              placeholder="username"
-              required
-              disabled={pending}
-              autoComplete="username"
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="password">Password</label>
-            <input
-              id="password"
-              name="password"
-              type="password"
-              className="form-control"
-              placeholder="••••••••"
-              required
-              disabled={pending}
-              autoComplete="current-password"
-            />
-          </div>
-          <button
-            type="submit"
-            className="btn btn-primary"
-            style={{ width: '100%' }}
-            disabled={pending}
-          >
-            {pending ? 'Signing in…' : 'Login'}
-          </button>
-        </form>
-
-        <div className="text-center" style={{ marginTop: '1.5rem', fontSize: '0.9rem' }}>
-          <span className="text-muted">Don&apos;t have an account?</span>{' '}
-          <Link href="/pricing" style={{ color: 'var(--accent-primary)', fontWeight: 'bold' }}>
-            Sign up
-          </Link>
-        </div>
+    <div className="w-full max-w-md rounded-3xl border border-white/[0.08] bg-surface/40 p-8 shadow-card backdrop-blur-xl">
+      <div className="text-center">
+        <Link href="/" className="inline-flex justify-center">
+          <Image
+            src="/images/logo.png"
+            alt="ThatMatter"
+            width={200}
+            height={72}
+            className="h-12 w-auto"
+            priority
+          />
+        </Link>
+        <h2 className="mt-4 font-display text-2xl font-bold text-white">Welcome back</h2>
+        <p className="mt-1 text-sm text-slate-400">Sign in to manage your campaigns</p>
       </div>
+
+      <form className="mt-8 space-y-4" onSubmit={onSubmit}>
+        <div>
+          <label htmlFor="username" className="mb-1 block text-sm text-slate-400">
+            Username
+          </label>
+          <input
+            id="username"
+            name="username"
+            type="text"
+            className={input}
+            placeholder="username"
+            required
+            disabled={pending}
+            autoComplete="username"
+          />
+        </div>
+        <div>
+          <label htmlFor="password" className="mb-1 block text-sm text-slate-400">
+            Password
+          </label>
+          <input
+            id="password"
+            name="password"
+            type="password"
+            className={input}
+            placeholder="••••••••"
+            required
+            disabled={pending}
+            autoComplete="current-password"
+          />
+        </div>
+        <button
+          type="submit"
+          className="w-full rounded-full bg-wa py-3 font-semibold text-canvas transition hover:bg-wa-dim disabled:opacity-60"
+          disabled={pending}
+        >
+          {pending ? 'Signing in…' : 'Login'}
+        </button>
+      </form>
+
+      <p className="mt-6 text-center text-sm text-slate-400">
+        Don&apos;t have an account?{' '}
+        <Link href="/pricing" className="font-semibold text-wa hover:underline">
+          Sign up
+        </Link>
+      </p>
     </div>
   );
 }

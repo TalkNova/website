@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
+import { ArrowLeft } from 'lucide-react';
 import { notFound } from 'next/navigation';
 import { PageShell } from '@/components/layout/PageShell';
 import { ArticleHtml } from '@/components/blog/ArticleHtml';
@@ -57,127 +58,56 @@ export default async function BlogPostPage({ params }: Props) {
 
   return (
     <PageShell blobs="post" navScrolled>
-      <header className="section" style={{ paddingTop: '150px', paddingBottom: '50px' }}>
-        <div className="container animate-on-scroll fade-up">
+      <header className="px-4 pb-12 pt-28 sm:px-6 lg:px-8 lg:pt-32">
+        <div className="mx-auto max-w-3xl">
           <Link
             href="/blog"
-            style={{
-              color: 'var(--accent-primary)',
-              fontWeight: 600,
-              marginBottom: '1rem',
-              display: 'inline-block',
-              textDecoration: 'none',
-              transition: 'var(--transition-smooth)',
-            }}
+            className="mb-6 inline-flex items-center gap-2 text-sm font-semibold text-wa transition hover:text-wa-dim"
           >
-            <i className="fa-solid fa-arrow-left" aria-hidden /> Back to Blog
+            <ArrowLeft className="h-4 w-4" />
+            Back to blog
           </Link>
-          <div
-            style={{
-              display: 'flex',
-              gap: '0.75rem',
-              flexWrap: 'wrap',
-              alignItems: 'center',
-              marginBottom: '0.75rem',
-              color: 'var(--text-muted)',
-              fontFamily: 'var(--font-outfit), Outfit, sans-serif',
-            }}
-          >
+          <div className="mb-3 flex flex-wrap items-center gap-2 text-sm text-slate-500">
             {post.category ? (
-              <span
-                style={{
-                  color: 'var(--accent-primary)',
-                  fontWeight: 700,
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.08em',
-                }}
-              >
-                {post.category}
-              </span>
+              <span className="font-bold uppercase tracking-wide text-wa">{post.category}</span>
             ) : null}
             <span>
               {formatPostDate(post.publishedAt)}
               {post.readingTime ? ` • ${post.readingTime} min read` : ''}
             </span>
           </div>
-          <h1
-            style={{
-              fontSize: 'clamp(2.4rem, 5vw, 3.5rem)',
-              marginBottom: '1rem',
-              lineHeight: 1.1,
-            }}
-          >
+          <h1 className="font-display text-4xl font-bold leading-tight text-white sm:text-5xl">
             {post.title}
           </h1>
-          <p
-            style={{
-              maxWidth: '720px',
-              color: 'var(--text-secondary)',
-              fontSize: '1.08rem',
-              lineHeight: 1.7,
-              marginBottom: '1.75rem',
-            }}
-          >
-            {post.excerpt}
-          </p>
+          <p className="mt-4 max-w-2xl text-lg text-slate-400">{post.excerpt}</p>
           {post.author ? (
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '1rem',
-                marginBottom: '2rem',
-              }}
-            >
-              <div
-                style={{
-                  width: '50px',
-                  height: '50px',
-                  borderRadius: '50%',
-                  background: 'var(--bg-tertiary)',
-                  overflow: 'hidden',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  position: 'relative',
-                }}
-              >
+            <div className="mt-6 flex items-center gap-3">
+              <div className="relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-full bg-surface-muted">
                 {post.author.avatar ? (
                   <Image
                     src={post.author.avatar}
                     alt={post.author.name || 'Author'}
                     fill
-                    sizes="50px"
+                    sizes="48px"
                     className="object-cover"
                   />
                 ) : (
-                  <span style={{ color: 'var(--text-primary)', fontWeight: 700 }}>
+                  <span className="font-bold text-white">
                     {(post.author.name || '?').slice(0, 1)}
                   </span>
                 )}
               </div>
-              <div>
-                <h4 style={{ margin: 0, fontSize: '1.1rem' }}>{post.author.name}</h4>
-              </div>
+              <p className="font-medium text-white">{post.author.name}</p>
             </div>
           ) : null}
           {post.coverImage ? (
-            <div
-              style={{
-                borderRadius: '20px',
-                overflow: 'hidden',
-                marginBottom: '2.5rem',
-                boxShadow: 'var(--glass-shadow)',
-                position: 'relative',
-                maxHeight: '500px',
-              }}
-            >
+            <div className="relative mt-8 overflow-hidden rounded-3xl border border-white/[0.08] shadow-card">
               <Image
                 src={post.coverImage}
                 alt={post.title}
                 width={1200}
                 height={675}
-                style={{ width: '100%', height: 'auto', maxHeight: '500px', objectFit: 'cover' }}
+                className="max-h-[480px] w-full object-cover"
                 priority
               />
             </div>
@@ -185,12 +115,10 @@ export default async function BlogPostPage({ params }: Props) {
         </div>
       </header>
 
-      <section className="section" style={{ paddingTop: 0 }}>
-        <div className="container" style={{ maxWidth: '900px', margin: '0 auto' }}>
-          <div className="animate-on-scroll fade-up delay-100">
-            <ArticleHtml html={html} post={post} />
-            <ShareBlock title={post.title} shareUrl={shareUrl} />
-          </div>
+      <section className="px-4 pb-24 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-3xl">
+          <ArticleHtml html={html} post={post} />
+          <ShareBlock title={post.title} shareUrl={shareUrl} />
         </div>
       </section>
     </PageShell>

@@ -10,22 +10,17 @@ export const metadata: Metadata = {
 export default function BlogPage() {
   return (
     <PageShell blobs="blog" navScrolled>
-      <header className="section" style={{ paddingTop: '150px', paddingBottom: '50px' }}>
-        <div className="container text-center animate-on-scroll fade-up">
-          <h1 style={{ fontSize: 'clamp(2rem, 5vw, 3rem)' }}>
-            Latest <span className="text-gradient">Insights</span>
-          </h1>
-          <p
-            className="text-secondary"
-            style={{ maxWidth: '600px', margin: '0 auto', fontSize: '1.2rem' }}
-          >
-            Tips, tricks, and updates to maximize your WhatsApp strategy.
-          </p>
-        </div>
+      <header className="px-4 pb-10 pt-28 text-center sm:px-6 lg:px-8 lg:pt-32">
+        <h1 className="font-display text-4xl font-bold text-white sm:text-5xl">
+          Latest <span className="text-gradient-wa">insights</span>
+        </h1>
+        <p className="mx-auto mt-4 max-w-xl text-lg text-slate-400">
+          Tips, tricks, and updates to maximize your WhatsApp strategy.
+        </p>
       </header>
 
-      <section className="section" style={{ paddingTop: 0 }}>
-        <div className="container">
+      <section className="px-4 pb-24 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-6xl">
           <BlogPostsGrid />
         </div>
       </section>

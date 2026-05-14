@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { PageShell } from '@/components/layout/PageShell';
 import { ContactForm } from '@/components/contact/ContactForm';
+import { Mail, MessageCircle } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Contact Us',
@@ -10,66 +11,39 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <PageShell blobs="contact" navScrolled>
-      <section className="section" style={{ paddingTop: '150px', minHeight: 'calc(100vh - 300px)' }}>
-        <div className="container">
-          <div className="split-grid">
-            <div className="animate-on-scroll fade-right">
-              <h1 style={{ fontSize: 'clamp(2rem, 5vw, 3rem)' }}>
-                Get in <span className="text-gradient">Touch</span>
-              </h1>
-              <p className="text-secondary mb-4">
-                Have a question about our pricing, features, or anything else? Our team is ready to
-                answer all your questions.
-              </p>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                  <div
-                    style={{
-                      width: '50px',
-                      height: '50px',
-                      background: 'rgba(16, 185, 129, 0.1)',
-                      borderRadius: '50%',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      color: 'var(--accent-primary)',
-                      fontSize: '1.2rem',
-                    }}
-                  >
-                    <i className="fa-solid fa-envelope" aria-hidden />
-                  </div>
-                  <div>
-                    <h4 style={{ margin: 0 }}>Email Us</h4>
-                    <span className="text-muted">support@thatmatter.com</span>
-                  </div>
+      <section className="min-h-[calc(100vh-8rem)] px-4 py-24 sm:px-6 lg:px-8 lg:py-28">
+        <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-2">
+          <div>
+            <h1 className="font-display text-4xl font-bold text-white sm:text-5xl">
+              Get in <span className="text-gradient-wa">touch</span>
+            </h1>
+            <p className="mt-4 text-slate-400">
+              Have a question about our pricing, features, or anything else? Our team is ready to
+              answer all your questions.
+            </p>
+            <div className="mt-10 space-y-6">
+              <div className="flex items-center gap-4">
+                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-wa/15 text-wa">
+                  <Mail className="h-5 w-5" />
                 </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                  <div
-                    style={{
-                      width: '50px',
-                      height: '50px',
-                      background: 'rgba(59, 130, 246, 0.1)',
-                      borderRadius: '50%',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      color: 'var(--accent-secondary)',
-                      fontSize: '1.2rem',
-                    }}
-                  >
-                    <i className="fa-brands fa-whatsapp" aria-hidden />
-                  </div>
-                  <div>
-                    <h4 style={{ margin: 0 }}>WhatsApp Us</h4>
-                    <span className="text-muted">+1 (555) 123-4567</span>
-                  </div>
+                <div>
+                  <p className="font-medium text-white">Email us</p>
+                  <p className="text-sm text-slate-400">support@thatmatter.com</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-4">
+                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-accent-cyan/15 text-accent-cyan">
+                  <MessageCircle className="h-5 w-5" />
+                </div>
+                <div>
+                  <p className="font-medium text-white">WhatsApp</p>
+                  <p className="text-sm text-slate-400">+1 (555) 123-4567</p>
                 </div>
               </div>
             </div>
-
-            <div className="glass-card animate-on-scroll fade-left delay-200">
-              <ContactForm />
-            </div>
+          </div>
+          <div className="rounded-3xl border border-white/[0.08] bg-surface/30 p-6 backdrop-blur sm:p-8">
+            <ContactForm />
           </div>
         </div>
       </section>

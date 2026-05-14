@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
 import { Inter, Outfit } from 'next/font/google';
-import { ScrollReveal } from '@/components/layout/ScrollReveal';
 import { getSiteUrl } from '@/lib/site';
 import './globals.css';
 
@@ -20,19 +19,27 @@ const outfit = Outfit({
 export const metadata: Metadata = {
   metadataBase: getSiteUrl(),
   title: {
-    default: 'ThatMatter - WhatsApp Marketing & Support',
+    default: 'ThatMatter — AI WhatsApp Automation for Business',
     template: '%s | ThatMatter',
   },
   description:
-    'Send WhatsApp marketing messages and solve customer issues through our innovative app.',
+    'AI-powered WhatsApp Business automation, custom chatbots, verified templates, campaigns, and lead generation — with full setup and 24/7 support.',
+  keywords: [
+    'WhatsApp Business API',
+    'WhatsApp automation',
+    'AI chatbot',
+    'marketing campaigns',
+    'lead generation',
+    'ThatMatter',
+  ],
   icons: { icon: '/favicon.png' },
   openGraph: {
     type: 'website',
     locale: 'en_US',
     siteName: 'ThatMatter',
-    title: 'ThatMatter - WhatsApp Marketing & Support',
+    title: 'ThatMatter — AI WhatsApp Automation for Business',
     description:
-      'Send WhatsApp marketing messages and solve customer issues through our innovative app.',
+      'Automate conversations, campaigns, and lead capture on WhatsApp with AI — built for teams that ship.',
   },
 };
 
@@ -43,16 +50,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} ${outfit.variable}`}>
-      <head>
-        <link
-          rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-        />
-      </head>
-      <body>
-        <ScrollReveal />
-        {children}
-      </body>
+      <body>{children}</body>
     </html>
   );
 }
