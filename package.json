@@ -4,6 +4,7 @@
   "private": true,
   "main": "index.js",
   "scripts": {
+    "build": "node --check server.js && node --check seed_blog.js && node --check check_db.js",
     "start": "node server.js",
     "dev": "node server.js",
     "admin:start": "npm --prefix admin-site start",
