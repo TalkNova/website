@@ -1,10 +1,12 @@
 {
   "name": "thatmatter-website",
   "version": "1.0.0",
+  "private": true,
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
     "dev": "node server.js",
+    "admin:start": "npm --prefix admin-site start",
     "seed:blog": "node seed_blog.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
