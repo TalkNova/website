@@ -2,24 +2,23 @@
   "name": "thatmatter-website",
   "version": "1.0.0",
   "private": true,
-  "main": "index.js",
   "scripts": {
-    "build": "node --check server.js && node --check seed_blog.js && node --check check_db.js",
-    "start": "node server.js",
-    "dev": "node server.js",
-    "admin:start": "npm --prefix admin-site start",
-    "seed:blog": "node seed_blog.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
   "dependencies": {
-    "body-parser": "^2.2.2",
-    "dotenv": "^17.4.2",
-    "express": "^5.2.1",
-    "express-session": "^1.19.0",
-    "mongoose": "^9.6.2"
+    "next": "^15.1.6",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.5",
+    "@types/react": "^19.0.7",
+    "@types/react-dom": "^19.0.3",
+    "eslint": "^9.18.0",
+    "eslint-config-next": "^15.1.6",
+    "typescript": "^5.7.3"
   }
 }
