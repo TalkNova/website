@@ -1,3 +1,5 @@
+'use client';
+
 import Link from 'next/link';
 import { MessageCircle } from 'lucide-react';
 import { IconLinkedIn, IconX } from '@/components/icons/BrandIcons';
@@ -87,7 +89,9 @@ export function LandingFooter() {
           </div>
         </div>
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/[0.06] pt-8 text-sm text-slate-500 sm:flex-row">
-          <p>&copy; {new Date().getFullYear()} ThatMatter. All rights reserved.</p>
+          <p suppressHydrationWarning>
+            &copy; {new Date().getFullYear()} ThatMatter. All rights reserved.
+          </p>
           <div className="flex gap-6">
             <a href="#" className="hover:text-slate-300">
               Privacy

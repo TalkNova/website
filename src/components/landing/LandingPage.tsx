@@ -1,3 +1,5 @@
+'use client';
+
 import { LandingNavbar } from '@/components/landing/LandingNavbar';
 import { LandingFooter } from '@/components/landing/LandingFooter';
 import { FloatingWhatsApp } from '@/components/landing/FloatingWhatsApp';

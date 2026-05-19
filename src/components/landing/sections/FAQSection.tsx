@@ -24,7 +24,7 @@ const faqs = [
 ];
 
 export function FAQSection() {
-  const [open, setOpen] = useState<number | null>(0);
+  const [open, setOpen] = useState<number | null>(null);
 
   return (
     <section className="relative z-10 border-t border-white/[0.06] py-20 sm:py-28">

@@ -1,5 +1,7 @@
 import type { BlogContentBlock } from '@/content/blog';
 
+export type TocHeading = { id: string; text: string; level: 2 | 3 };
+
 function escapeHtml(value: string): string {
   return String(value || '')
     .replace(/&/g, '&amp;')
@@ -9,14 +11,23 @@ function escapeHtml(value: string): string {
     .replace(/'/g, '&#39;');
 }
 
+function slugifyHeading(text: string): string {
+  return text
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, '')
+    .trim()
+    .replace(/\s+/g, '-');
+}
+
 function renderInlineMarkdown(value: string): string {
   const escaped = escapeHtml(value);
   return escaped
-    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-    .replace(/\*(.+?)\*/g, '<em>$1</em>');
+    .replace(/\*\*(.+?)\*\*/g, '<strong class="font-semibold text-white">$1</strong>')
+    .replace(/\*(.+?)\*/g, '<em>$1</em>')
+    .replace(/`(.+?)`/g, '<code class="rounded bg-white/10 px-1.5 py-0.5 text-sm text-violet-200">$1</code>');
 }
 
-function renderMarkdownBlock(value: string): string {
+function renderMarkdownBlock(value: string, headings: TocHeading[]): string {
   const lines = String(value || '').replace(/\r\n/g, '\n').split('\n');
   const html: string[] = [];
   let listItems: string[] = [];
@@ -24,11 +35,8 @@ function renderMarkdownBlock(value: string): string {
   const flushList = () => {
     if (listItems.length) {
       html.push(
-        `<ul style="padding-left: 1.4rem; margin: 0 0 1.2rem 0;">${listItems
-          .map(
-            (item) =>
-              `<li style="margin-bottom: 0.45rem;">${renderInlineMarkdown(item)}</li>`,
-          )
+        `<ul class="my-6 list-disc space-y-2 pl-6 text-slate-300">${listItems
+          .map((item) => `<li>${renderInlineMarkdown(item)}</li>`)
           .join('')}</ul>`,
       );
       listItems = [];
@@ -44,24 +52,39 @@ function renderMarkdownBlock(value: string): string {
 
     if (trimmed.startsWith('### ')) {
       flushList();
+      const text = trimmed.slice(4);
+      const id = slugifyHeading(text);
+      headings.push({ id, text, level: 3 });
       html.push(
-        `<h3 style="color: var(--text-primary); margin-top: 2rem; margin-bottom: 1rem;">${renderInlineMarkdown(trimmed.slice(4))}</h3>`,
+        `<h3 id="${id}" class="scroll-mt-28 font-display text-xl font-semibold text-white mt-10 mb-4">${renderInlineMarkdown(text)}</h3>`,
       );
       return;
     }
 
     if (trimmed.startsWith('## ')) {
       flushList();
+      const text = trimmed.slice(3);
+      const id = slugifyHeading(text);
+      headings.push({ id, text, level: 2 });
       html.push(
-        `<h2 style="color: var(--text-primary); margin-top: 2.4rem; margin-bottom: 1rem;">${renderInlineMarkdown(trimmed.slice(3))}</h2>`,
+        `<h2 id="${id}" class="scroll-mt-28 font-display text-2xl font-bold text-white mt-12 mb-4">${renderInlineMarkdown(text)}</h2>`,
       );
       return;
     }
 
     if (trimmed.startsWith('# ')) {
       flushList();
+      const text = trimmed.slice(2);
       html.push(
-        `<h1 style="color: var(--text-primary); margin-top: 0; margin-bottom: 1rem;">${renderInlineMarkdown(trimmed.slice(2))}</h1>`,
+        `<h1 class="font-display text-3xl font-bold text-white mb-6">${renderInlineMarkdown(text)}</h1>`,
+      );
+      return;
+    }
+
+    if (trimmed.startsWith('> ')) {
+      flushList();
+      html.push(
+        `<blockquote class="my-8 border-l-4 border-violet-500/60 bg-violet-500/10 px-6 py-4 text-lg italic text-slate-200 rounded-r-xl">${renderInlineMarkdown(trimmed.slice(2))}</blockquote>`,
       );
       return;
     }
@@ -72,9 +95,7 @@ function renderMarkdownBlock(value: string): string {
     }
 
     flushList();
-    html.push(
-      `<p style="margin-bottom: 1.15rem;">${renderInlineMarkdown(trimmed)}</p>`,
-    );
+    html.push(`<p class="mb-5 leading-relaxed text-slate-300">${renderInlineMarkdown(trimmed)}</p>`);
   });
 
   flushList();
@@ -82,12 +103,24 @@ function renderMarkdownBlock(value: string): string {
 }
 
 export function markdownBlocksToHtml(content: BlogContentBlock[]): string {
-  return content
+  const headings: TocHeading[] = [];
+  const html = content
     .map((block) => {
       if (block.type === 'markdown' && block.text) {
-        return renderMarkdownBlock(block.text);
+        return renderMarkdownBlock(block.text, headings);
       }
-      return `<p style="margin-bottom: 1.15rem;">${escapeHtml(block.text || '')}</p>`;
+      return `<p class="mb-5 text-slate-300">${escapeHtml(block.text || '')}</p>`;
     })
     .join('');
+  return html;
+}
+
+export function extractHeadingsFromContent(content: BlogContentBlock[]): TocHeading[] {
+  const headings: TocHeading[] = [];
+  content.forEach((block) => {
+    if (block.type === 'markdown' && block.text) {
+      renderMarkdownBlock(block.text, headings);
+    }
+  });
+  return headings;
 }

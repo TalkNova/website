@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
+import { useScroll, useMotionValueEvent } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
 import { cn } from '@/lib/cn';
@@ -35,8 +35,7 @@ export function LandingNavbar({ scrolledInitially = false }: LandingNavbarProps)
   });
 
   return (
-    <motion.header
-      layout
+    <header
       className={cn(
         'fixed inset-x-0 top-0 z-[1000] border-b backdrop-blur-xl transition-colors duration-300',
         scrolled
@@ -119,6 +118,6 @@ export function LandingNavbar({ scrolledInitially = false }: LandingNavbarProps)
           </Link>
         </div>
       </div>
-    </motion.header>
+    </header>
   );
 }

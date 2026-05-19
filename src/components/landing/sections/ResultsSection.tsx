@@ -38,7 +38,10 @@ function AnimatedNumber({
   }, [enabled, value]);
 
   return (
-    <span className="font-display text-4xl font-bold text-white sm:text-5xl">
+    <span
+      className="font-display text-4xl font-bold text-white sm:text-5xl"
+      suppressHydrationWarning
+    >
       {n}
       {suffix}
     </span>
