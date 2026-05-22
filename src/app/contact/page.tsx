@@ -37,7 +37,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <p className="font-medium text-white">WhatsApp</p>
-                  <p className="text-sm text-slate-400">+1 (555) 123-4567</p>
+                  <p className="text-sm text-slate-400">+91 7483358716</p>
                 </div>
               </div>
             </div>

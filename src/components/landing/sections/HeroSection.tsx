@@ -84,7 +84,7 @@ export function HeroSection() {
               <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
             </Link>
             <a
-              href="https://wa.me/15551234567"
+              href="https://wa.me/917483358716"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.04] px-6 py-3.5 text-sm font-semibold text-white backdrop-blur transition hover:border-wa/40 hover:bg-white/[0.07] sm:text-base"

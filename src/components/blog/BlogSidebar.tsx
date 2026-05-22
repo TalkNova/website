@@ -185,7 +185,7 @@ export function BlogSidebar({
           </div>
         </div>
         <a
-          href="https://wa.me/15551234567"
+          href="https://wa.me/917483358716"
           target="_blank"
           rel="noopener noreferrer"
           className="mt-4 block w-full rounded-full bg-wa py-2.5 text-center text-sm font-semibold text-canvas transition hover:bg-wa-dim"

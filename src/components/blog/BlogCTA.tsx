@@ -28,7 +28,7 @@ const variants = [
     title: 'Scale Customer Support Using AI',
     desc: 'Resolve FAQs instantly and hand off to humans with full context.',
     cta: 'Chat on WhatsApp',
-    href: 'https://wa.me/15551234567',
+    href: 'https://wa.me/917483358716',
     gradient: 'from-emerald-600/20 to-cyan-600/20',
     glow: 'rgb(37 211 102 / 0.35)',
   },

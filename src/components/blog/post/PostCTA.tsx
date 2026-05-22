@@ -31,7 +31,7 @@ export function PostCTA() {
             Book free demo
           </Link>
           <a
-            href="https://wa.me/15551234567"
+            href="https://wa.me/917483358716"
             target="_blank"
             rel="noopener noreferrer"
             className={`${btnBase} w-full border border-wa/40 bg-wa/10 text-wa hover:bg-wa/20 sm:w-auto`}

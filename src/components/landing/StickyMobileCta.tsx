@@ -19,7 +19,7 @@ export function StickyMobileCta() {
           Book demo
         </Link>
         <a
-          href="https://wa.me/15551234567"
+          href="https://wa.me/917483358716"
           target="_blank"
           rel="noopener noreferrer"
           className="flex-1 rounded-full border border-white/15 py-3 text-center text-sm font-semibold text-white"

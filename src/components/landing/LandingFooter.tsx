@@ -29,7 +29,7 @@ export function LandingFooter() {
               for teams that want to scale conversations.
             </p>
             <a
-              href="https://wa.me/15551234567"
+              href="https://wa.me/917483358716"
               target="_blank"
               rel="noopener noreferrer"
               className="mt-4 inline-flex items-center gap-2 rounded-full border border-wa/40 bg-wa/10 px-4 py-2 text-sm font-medium text-wa transition hover:bg-wa/20"
