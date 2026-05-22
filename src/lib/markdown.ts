@@ -1,4 +1,4 @@
-import type { BlogContentBlock } from '@/content/blog';
+import type { BlogContentBlock } from '@/types/blog';
 
 export type TocHeading = { id: string; text: string; level: 2 | 3 };
 

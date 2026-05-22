@@ -8,15 +8,23 @@ import { getSiteUrl } from '@/lib/site';
 import { blogPostJsonLd } from '@/lib/blog-jsonld';
 import { getBlogPostSeo } from '@/lib/blog-metadata';
 
+export const revalidate = 60;
+export const dynamicParams = true;
+
 type Props = { params: Promise<{ slug: string }> };
 
 export async function generateStaticParams() {
-  return getAllSlugs().map((slug) => ({ slug }));
+  try {
+    const slugs = await getAllSlugs();
+    return slugs.map((slug) => ({ slug }));
+  } catch {
+    return [];
+  }
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = await getPostBySlug(slug);
   if (!post) {
     return { title: 'Not found' };
   }
@@ -51,12 +59,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = await getPostBySlug(slug);
   if (!post) notFound();
 
-  const html = markdownBlocksToHtml(post.content);
-  const headings = extractHeadingsFromContent(post.content);
-  const related = getRelatedPosts(slug, 3);
+  const content = post.content ?? [];
+  const html = markdownBlocksToHtml(content);
+  const headings = extractHeadingsFromContent(content);
+  const related = await getRelatedPosts(slug, 3);
   const shareUrl = new URL(`/blog/${post.slug}`, getSiteUrl()).toString();
   const siteUrl = getSiteUrl().toString().replace(/\/$/, '');
   const jsonLd = blogPostJsonLd(siteUrl, post);

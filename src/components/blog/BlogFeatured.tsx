@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ArrowRight, Clock } from 'lucide-react';
-import type { BlogPost } from '@/content/blog';
+import type { BlogPost } from '@/types/blog';
 import { formatPostDate } from '@/lib/format-post-date';
 
 type BlogFeaturedProps = {
