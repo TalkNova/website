@@ -1,11 +1,10 @@
 'use client';
 
-import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { MessageCircle, TrendingUp } from 'lucide-react';
-import type { BlogPost } from '@/types/blog';
+import type { BlogPost } from '@/content/blog';
 import { formatPostDate } from '@/lib/format-post-date';
 
 type BlogSidebarProps = {
@@ -21,42 +20,6 @@ export function BlogSidebar({
   activeCategory,
   onCategoryChange,
 }: BlogSidebarProps) {
-  const [email, setEmail] = useState('');
-  const [subscribeStatus, setSubscribeStatus] = useState<
-    'idle' | 'loading' | 'success' | 'error'
-  >('idle');
-  const [subscribeMessage, setSubscribeMessage] = useState('');
-
-  async function handleNewsletterSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    const trimmed = email.trim();
-    if (!trimmed) return;
-
-    setSubscribeStatus('loading');
-    setSubscribeMessage('');
-
-    try {
-      const res = await fetch('/api/blog/newsletter', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: trimmed, source: 'blog-sidebar' }),
-      });
-      const data = (await res.json()) as { message?: string; success?: boolean };
-
-      if (res.ok) {
-        setSubscribeStatus('success');
-        setSubscribeMessage(data.message ?? 'Subscribed successfully');
-        setEmail('');
-      } else {
-        setSubscribeStatus('error');
-        setSubscribeMessage(data.message ?? 'Could not subscribe. Try again.');
-      }
-    } catch {
-      setSubscribeStatus('error');
-      setSubscribeMessage('Could not subscribe. Try again.');
-    }
-  }
-
   return (
     <aside className="space-y-6 lg:sticky lg:top-24 lg:self-start">
       <motion.div
@@ -134,37 +97,27 @@ export function BlogSidebar({
         <p className="mt-2 text-sm text-slate-400">
           Get WhatsApp automation playbooks and AI insights in your inbox.
         </p>
-        <form className="mt-4 space-y-2" onSubmit={handleNewsletterSubmit}>
+        <form
+          className="mt-4 space-y-2"
+          onSubmit={(e) => {
+            e.preventDefault();
+          }}
+        >
           <label htmlFor="blog-newsletter" className="sr-only">
             Email address
           </label>
           <input
             id="blog-newsletter"
             type="email"
-            required
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
             placeholder="you@company.com"
-            disabled={subscribeStatus === 'loading'}
-            className="w-full rounded-xl border border-white/10 bg-canvas/60 px-3 py-2.5 text-sm text-white placeholder:text-slate-500 focus:border-violet-500/50 focus:outline-none focus:ring-2 focus:ring-violet-500/20 disabled:opacity-60"
+            className="w-full rounded-xl border border-white/10 bg-canvas/60 px-3 py-2.5 text-sm text-white placeholder:text-slate-500 focus:border-violet-500/50 focus:outline-none focus:ring-2 focus:ring-violet-500/20"
           />
           <button
             type="submit"
-            disabled={subscribeStatus === 'loading'}
-            className="w-full rounded-xl bg-gradient-to-r from-violet-600 to-blue-600 py-2.5 text-sm font-semibold text-white transition hover:opacity-90 disabled:opacity-60"
+            className="w-full rounded-xl bg-gradient-to-r from-violet-600 to-blue-600 py-2.5 text-sm font-semibold text-white transition hover:opacity-90"
           >
-            {subscribeStatus === 'loading' ? 'Subscribing…' : 'Subscribe'}
+            Subscribe
           </button>
-          {subscribeMessage ? (
-            <p
-              className={`text-xs ${
-                subscribeStatus === 'success' ? 'text-emerald-400' : 'text-rose-400'
-              }`}
-              role="status"
-            >
-              {subscribeMessage}
-            </p>
-          ) : null}
         </form>
       </motion.div>
 

@@ -7,8 +7,7 @@
     "dev:clean": "rm -rf .next && next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "legal:extract": "node scripts/legal-extract.mjs"
+    "lint": "next lint"
   },
   "dependencies": {
     "@tailwindcss/postcss": "^4.3.0",

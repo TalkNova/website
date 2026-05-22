@@ -93,12 +93,12 @@ export function LandingFooter() {
             &copy; {new Date().getFullYear()} ThatMatter. All rights reserved.
           </p>
           <div className="flex gap-6">
-            <Link href="/privacy-policy" className="hover:text-slate-300">
+            <a href="#" className="hover:text-slate-300">
               Privacy
-            </Link>
-            <Link href="/terms-and-conditions" className="hover:text-slate-300">
+            </a>
+            <a href="#" className="hover:text-slate-300">
               Terms
-            </Link>
+            </a>
           </div>
         </div>
       </div>

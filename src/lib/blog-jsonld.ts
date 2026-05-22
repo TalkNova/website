@@ -1,4 +1,4 @@
-import type { BlogPost } from '@/types/blog';
+import type { BlogPost } from '@/content/blog';
 import { getBlogPostSeo } from '@/lib/blog-metadata';
 
 export function blogListingJsonLd(siteUrl: string, posts: BlogPost[]) {
@@ -12,15 +12,15 @@ export function blogListingJsonLd(siteUrl: string, posts: BlogPost[]) {
     blogPost: posts.slice(0, 10).map((post) => {
       const seo = getBlogPostSeo(post);
       return {
-        '@type': 'BlogPosting',
-        headline: post.title,
-        description: seo.metaDescription,
-        datePublished: post.publishedAt,
-        dateModified: post.updatedAt,
-        author: { '@type': 'Person', name: post.author.name },
-        url: `${siteUrl}/blog/${post.slug}`,
-        image: post.coverImage,
-      };
+      '@type': 'BlogPosting',
+      headline: post.title,
+      description: seo.metaDescription,
+      datePublished: post.publishedAt,
+      dateModified: post.updatedAt,
+      author: { '@type': 'Person', name: post.author.name },
+      url: `${siteUrl}/blog/${post.slug}`,
+      image: post.coverImage,
+    };
     }),
   };
 }

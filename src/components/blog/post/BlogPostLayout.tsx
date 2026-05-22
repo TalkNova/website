@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Clock } from 'lucide-react';
-import type { BlogPost } from '@/types/blog';
+import type { BlogPost } from '@/content/blog';
 import type { TocHeading } from '@/lib/markdown';
 import { formatPostDate } from '@/lib/format-post-date';
 import { ReadingProgress } from '@/components/blog/post/ReadingProgress';
