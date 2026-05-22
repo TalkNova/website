@@ -13,7 +13,7 @@ type PageShellProps = {
 
 export function PageShell({ children, blobs, navScrolled }: PageShellProps) {
   return (
-    <div className="relative min-h-screen bg-canvas text-slate-100">
+    <div className="relative min-h-screen overflow-x-clip bg-canvas text-slate-100">
       <Blobs variant={blobs} />
       <LandingNavbar scrolledInitially={navScrolled} />
       {children}

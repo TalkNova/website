@@ -25,7 +25,7 @@ export function Blobs({ variant }: { variant: BlobVariant }) {
     return (
       <>
         <div className={`${blob} -left-24 top-20 h-72 w-72 bg-wa/30`} />
-        <div className={`${blob} right-[-120px] top-1/2 h-96 w-96 bg-accent-emerald/20`} />
+        <div className={`${blob} right-0 top-1/2 h-96 w-96 translate-x-1/4 bg-accent-emerald/20`} />
       </>
     );
   }

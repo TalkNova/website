@@ -20,7 +20,7 @@
     scroll-behavior: smooth;
   }
   body {
-    @apply bg-canvas text-slate-100 antialiased;
+    @apply overflow-x-clip bg-canvas text-slate-100 antialiased;
     font-family: var(--font-sans);
   }
 }

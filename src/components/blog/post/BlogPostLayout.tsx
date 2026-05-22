@@ -25,12 +25,12 @@ type BlogPostLayoutProps = {
 
 export function BlogPostLayout({ post, html, headings, related, shareUrl }: BlogPostLayoutProps) {
   return (
-    <article className="relative min-h-screen">
+    <article className="relative min-h-screen overflow-x-clip">
       <BlogAmbient />
       <ReadingProgress />
 
       <header className="relative px-4 pb-10 pt-28 sm:px-6 lg:px-8 lg:pt-32">
-        <div className="mx-auto max-w-6xl">
+        <div className="mx-auto min-w-0 max-w-6xl">
           <Link
             href="/blog"
             className="mb-8 inline-flex items-center gap-2 text-sm font-medium text-violet-400 transition hover:text-violet-300"
@@ -43,7 +43,7 @@ export function BlogPostLayout({ post, html, headings, related, shareUrl }: Blog
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="max-w-3xl"
+            className="min-w-0 max-w-3xl"
           >
             <motion.div className="flex flex-wrap items-center gap-3 text-sm">
               {post.category ? (
@@ -60,7 +60,7 @@ export function BlogPostLayout({ post, html, headings, related, shareUrl }: Blog
               ) : null}
             </motion.div>
 
-            <h1 className="mt-4 font-display text-4xl font-bold leading-[1.12] tracking-tight text-white sm:text-5xl lg:text-[3.25rem]">
+            <h1 className="mt-4 break-words font-display text-4xl font-bold leading-[1.12] tracking-tight text-white sm:text-5xl lg:text-[3.25rem]">
               {post.title}
             </h1>
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-slate-400">{post.excerpt}</p>
@@ -105,8 +105,8 @@ export function BlogPostLayout({ post, html, headings, related, shareUrl }: Blog
         </div>
       </header>
 
-      <div className="mx-auto max-w-6xl px-4 pb-24 sm:px-6 lg:px-8">
-        <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_260px] lg:gap-16">
+      <div className="mx-auto min-w-0 max-w-6xl px-4 pb-24 sm:px-6 lg:px-8">
+        <div className="grid min-w-0 gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,260px)] lg:gap-16">
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -124,7 +124,7 @@ export function BlogPostLayout({ post, html, headings, related, shareUrl }: Blog
             <RelatedPosts posts={related} />
           </motion.div>
 
-          <aside className="hidden lg:block">
+          <aside className="hidden min-w-0 lg:block">
             <div className="sticky top-24">
               <TableOfContents headings={headings} />
             </div>
