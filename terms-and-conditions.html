@@ -1,0 +1,390 @@
+<!--
+  Static preview only. The live site serves this content at /terms-and-conditions
+  (Next.js). After editing this file, run: npm run legal:extract
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Terms & Conditions — ThatMatter</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg: #0a0f0d;
+    --surface: #111812;
+    --card: #16201a;
+    --border: #1f2e24;
+    --accent: #25d366;
+    --accent2: #128c7e;
+    --accent-dim: rgba(37,211,102,0.08);
+    --text: #e8f0ea;
+    --muted: #7a9480;
+    --warn: #f5a623;
+    --warn-dim: rgba(245,166,35,0.08);
+    --danger: #e05252;
+    --danger-dim: rgba(224,82,82,0.08);
+    --info: #4a9eff;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Sora', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.75;
+    font-size: 15px;
+  }
+  header {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(10,15,13,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 40px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .logo { font-size: 18px; font-weight: 700; color: var(--accent); letter-spacing: -0.3px; text-decoration: none; }
+  .logo span { color: var(--text); }
+  .badge-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; color: var(--muted);
+    background: var(--card); border: 1px solid var(--border);
+    padding: 4px 10px; border-radius: 20px;
+  }
+  .doc-hero {
+    padding: 72px 40px 48px;
+    max-width: 860px; margin: 0 auto;
+    border-bottom: 1px solid var(--border);
+  }
+  .doc-type {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 16px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .doc-type::before { content: ''; display: block; width: 24px; height: 1px; background: var(--accent); }
+  .doc-hero h1 {
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 700; line-height: 1.15;
+    letter-spacing: -0.5px; margin-bottom: 16px;
+  }
+  .doc-hero p { color: var(--muted); font-size: 15px; max-width: 560px; }
+  .doc-layout {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    max-width: 1060px; margin: 0 auto;
+  }
+  .sidebar {
+    border-right: 1px solid var(--border);
+    padding: 40px 24px;
+    position: sticky; top: 57px;
+    height: calc(100vh - 57px);
+    overflow-y: auto;
+  }
+  .sidebar-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 16px;
+  }
+  .sidebar nav a {
+    display: block; padding: 7px 12px;
+    text-decoration: none; color: var(--muted);
+    font-size: 13px; border-radius: 6px;
+    transition: all 0.15s; border-left: 2px solid transparent;
+    margin-bottom: 2px;
+  }
+  .sidebar nav a:hover { color: var(--text); background: var(--card); border-left-color: var(--accent); }
+  .content { padding: 48px 48px 80px; max-width: 720px; }
+  .section { margin-bottom: 56px; }
+  .section-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; color: var(--accent);
+    margin-bottom: 8px; letter-spacing: 1px;
+  }
+  .section h2 {
+    font-size: 22px; font-weight: 600; margin-bottom: 20px;
+    letter-spacing: -0.3px;
+    padding-bottom: 12px; border-bottom: 1px solid var(--border);
+  }
+  .section p { color: #b8c9bc; margin-bottom: 14px; }
+  .callout {
+    border-radius: 10px; padding: 18px 20px;
+    margin: 20px 0; border-left: 3px solid;
+  }
+  .callout.green { background: var(--accent-dim); border-color: var(--accent); }
+  .callout.warn { background: var(--warn-dim); border-color: var(--warn); }
+  .callout.danger { background: var(--danger-dim); border-color: var(--danger); }
+  .callout.info { background: rgba(74,158,255,0.06); border-color: var(--info); }
+  .callout-title { font-size: 12px; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 6px; }
+  .callout.green .callout-title { color: var(--accent); }
+  .callout.warn .callout-title { color: var(--warn); }
+  .callout.danger .callout-title { color: var(--danger); }
+  .callout.info .callout-title { color: var(--info); }
+  .callout p { color: #b8c9bc; margin: 0; font-size: 14px; }
+  .credit-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+  .credit-table thead tr { background: var(--card); border-bottom: 1px solid var(--border); }
+  .credit-table th { padding: 12px 16px; text-align: left; font-weight: 600; color: var(--muted); font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; }
+  .credit-table td { padding: 12px 16px; border-bottom: 1px solid var(--border); color: #b8c9bc; }
+  .credit-table tr:last-child td { border-bottom: none; }
+  .tag { display: inline-block; padding: 3px 9px; border-radius: 20px; font-size: 11px; font-weight: 600; font-family: 'JetBrains Mono', monospace; }
+  .tag.yes { background: rgba(37,211,102,0.12); color: var(--accent); }
+  .tag.no { background: var(--danger-dim); color: var(--danger); }
+  .doc-list { list-style: none; margin: 14px 0; }
+  .doc-list li { padding: 6px 0 6px 22px; position: relative; color: #b8c9bc; font-size: 14px; border-bottom: 1px solid rgba(255,255,255,0.03); }
+  .doc-list li::before { content: '->'; position: absolute; left: 0; color: var(--accent); font-size: 12px; top: 7px; }
+  .steps { margin: 20px 0; }
+  .step { display: flex; gap: 16px; margin-bottom: 16px; padding: 16px; background: var(--card); border: 1px solid var(--border); border-radius: 10px; }
+  .step-num { min-width: 32px; height: 32px; background: var(--accent-dim); border: 1px solid rgba(37,211,102,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); font-weight: 600; }
+  .step-body strong { display: block; font-size: 14px; margin-bottom: 4px; }
+  .step-body span { color: var(--muted); font-size: 13px; }
+  footer { border-top: 1px solid var(--border); padding: 32px 40px; text-align: center; color: var(--muted); font-size: 13px; }
+  footer a { color: var(--accent); text-decoration: none; }
+  @media (max-width: 768px) {
+    .doc-layout { grid-template-columns: 1fr; }
+    .sidebar { display: none; }
+    header { padding: 14px 20px; }
+    .doc-hero { padding: 48px 20px 32px; }
+    .content { padding: 32px 20px 60px; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <a href="#" class="logo">That<span>Matter</span></a>
+  <span class="badge-date">Effective: 21 May 2026</span>
+</header>
+<div class="doc-hero">
+  <div class="doc-type">Legal Document</div>
+  <h1>Terms &amp; Conditions</h1>
+  <p>Please read these terms carefully before using ThatMatter's WhatsApp Automation platform. By accessing our services, you agree to be bound by these terms.</p>
+</div>
+<div class="doc-layout">
+  <aside class="sidebar">
+    <div class="sidebar-title">Contents</div>
+    <nav>
+      <a href="#acceptance">1. Acceptance</a>
+      <a href="#services">2. Services</a>
+      <a href="#prepaid">3. Prepaid Credits</a>
+      <a href="#credit-deduction">4. Credit Deduction</a>
+      <a href="#failed-messages">5. Failed Messages</a>
+      <a href="#refund-ticket">6. Refund via Ticket</a>
+      <a href="#postpaid">7. Postpaid Plan</a>
+      <a href="#bgv">8. Background Verification</a>
+      <a href="#conduct">9. Acceptable Use</a>
+      <a href="#termination">10. Termination</a>
+      <a href="#liability">11. Liability</a>
+      <a href="#changes">12. Changes to Terms</a>
+      <a href="#contact">13. Contact</a>
+    </nav>
+  </aside>
+  <main class="content">
+    <div class="section" id="acceptance">
+      <div class="section-num">01</div>
+      <h2>Acceptance of Terms</h2>
+      <p>By registering for, accessing, or using ThatMatter ("Platform", "we", "us"), you ("User", "Customer") confirm that you have read, understood, and agree to be bound by these Terms &amp; Conditions and all applicable laws and regulations.</p>
+      <p>If you are accepting on behalf of a company or legal entity, you represent that you have the authority to bind that entity to these terms.</p>
+    </div>
+    <div class="section" id="services">
+      <div class="section-num">02</div>
+      <h2>Description of Services</h2>
+      <p>ThatMatter provides an AI-powered WhatsApp Business automation platform that includes:</p>
+      <ul class="doc-list">
+        <li>Bulk and targeted WhatsApp marketing message delivery</li>
+        <li>Template (Emplet) creation and management</li>
+        <li>Automated customer support workflows</li>
+        <li>Campaign analytics and delivery tracking</li>
+        <li>Multi-agent support inbox</li>
+      </ul>
+      <p>All services are delivered subject to Meta's WhatsApp Business API policies, which supersede these terms where applicable.</p>
+    </div>
+    <div class="section" id="prepaid">
+      <div class="section-num">03</div>
+      <h2>Prepaid Credits — No Refund Policy</h2>
+      <div class="callout danger">
+        <div class="callout-title">No Refund on Prepaid Top-Ups</div>
+        <p>Once a prepaid amount is added to your ThatMatter wallet, it is <strong>non-refundable under any circumstances</strong>. Credits do not expire and remain in your account until used.</p>
+      </div>
+      <p>Prepaid credits are purchased in advance and loaded into your account wallet. The following conditions apply:</p>
+      <ul class="doc-list">
+        <li>All prepaid transactions are final and non-reversible</li>
+        <li>Credits cannot be transferred to another account</li>
+        <li>Credits cannot be exchanged for cash or any other form of currency</li>
+        <li>Unused credits are forfeited upon account termination due to policy violation</li>
+        <li>Credits may be carried forward indefinitely on active accounts</li>
+      </ul>
+    </div>
+    <div class="section" id="credit-deduction">
+      <div class="section-num">04</div>
+      <h2>Credit Deduction Policy</h2>
+      <p>Credits are deducted <strong>only</strong> upon successful delivery milestones as defined below:</p>
+      <table class="credit-table">
+        <thead>
+          <tr>
+            <th>Message Status</th>
+            <th>Credits Deducted?</th>
+            <th>Details</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Sent</td>
+            <td><span class="tag yes">YES</span></td>
+            <td>Message accepted by WhatsApp servers</td>
+          </tr>
+          <tr>
+            <td>Delivered</td>
+            <td><span class="tag yes">YES</span></td>
+            <td>Message reached recipient's device</td>
+          </tr>
+          <tr>
+            <td>Read</td>
+            <td><span class="tag yes">YES</span></td>
+            <td>Message opened by recipient</td>
+          </tr>
+          <tr>
+            <td>Failed</td>
+            <td><span class="tag no">NO</span></td>
+            <td>Credits are NOT deducted for failed messages</td>
+          </tr>
+          <tr>
+            <td>Pending / Queued</td>
+            <td><span class="tag no">NO</span></td>
+            <td>Credits held, not deducted until status confirmed</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="callout green">
+        <div class="callout-title">Fair Billing Guarantee</div>
+        <p>You are never charged for messages that fail to reach their destination. The system automatically reverses any pre-reserved credit for failed messages within 24 hours.</p>
+      </div>
+    </div>
+    <div class="section" id="failed-messages">
+      <div class="section-num">05</div>
+      <h2>Failed Messages — Credit Protection</h2>
+      <p>A message is classified as "Failed" when it is rejected before delivery. Common reasons include:</p>
+      <ul class="doc-list">
+        <li>Invalid or unregistered recipient phone number</li>
+        <li>Recipient has blocked the WhatsApp Business number</li>
+        <li>WhatsApp API rate limiting or gateway errors</li>
+        <li>Template not approved or rejected by Meta</li>
+        <li>Network or infrastructure failure on Meta's end</li>
+      </ul>
+      <p>In all such cases, <strong>no credits will be deducted</strong> from your prepaid wallet for that specific message.</p>
+    </div>
+    <div class="section" id="refund-ticket">
+      <div class="section-num">06</div>
+      <h2>Credit Refund via Support Ticket</h2>
+      <div class="callout warn">
+        <div class="callout-title">Ticket-Based Credit Recovery</div>
+        <p>If credits were incorrectly deducted for a failed message, you may raise a support ticket within <strong>7 days</strong> of the incident. Credits may be reversed after investigation and approval.</p>
+      </div>
+      <p>To raise a ticket for credit recovery, follow these steps:</p>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <strong>Log in to your dashboard</strong>
+            <span>Navigate to Support and select "Raise a Ticket"</span>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <strong>Select "Credit Dispute" as ticket type</strong>
+            <span>Provide the campaign ID, message ID, and date range of the issue</span>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <strong>Submit with evidence</strong>
+            <span>Attach screenshots of failed message logs or delivery reports</span>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-body">
+            <strong>Resolution within 3 to 5 business days</strong>
+            <span>Our team investigates and credits your wallet if the dispute is valid</span>
+          </div>
+        </div>
+      </div>
+      <p>ThatMatter reserves the right to decline requests filed after 7 days, lacking sufficient evidence, or caused by user error such as uploading invalid numbers.</p>
+    </div>
+    <div class="section" id="postpaid">
+      <div class="section-num">07</div>
+      <h2>Postpaid Plan — Terms &amp; Conditions</h2>
+      <p>The Postpaid plan allows eligible businesses to use the platform with billing at the end of each cycle. Postpaid access is subject to approval and mandatory conditions:</p>
+      <div class="callout info">
+        <div class="callout-title">Postpaid Eligibility</div>
+        <p>Postpaid plans are not available by default. Approval is at ThatMatter's sole discretion based on business profile, usage history, and compliance with all onboarding requirements.</p>
+      </div>
+      <ul class="doc-list">
+        <li>A security <strong>deposit</strong> equivalent to one month's projected usage is required before activation</li>
+        <li>A formal <strong>service contract</strong> must be signed between the customer and ThatMatter</li>
+        <li>A <strong>background and business verification</strong> process (see Section 8) must be completed</li>
+        <li>Payment is due within 15 days of invoice date; late payments attract a 2% monthly penalty</li>
+        <li>ThatMatter may suspend postpaid access immediately upon missed payment</li>
+        <li>The security deposit will be forfeited upon account termination due to policy violations</li>
+        <li>Deposit refunds (if eligible) are processed within 30 business days of contract termination</li>
+      </ul>
+    </div>
+    <div class="section" id="bgv">
+      <div class="section-num">08</div>
+      <h2>Background &amp; Business Verification (BGV)</h2>
+      <p>All postpaid applicants and Enterprise plan customers must complete a mandatory Business Verification process including:</p>
+      <ul class="doc-list">
+        <li>Valid business registration documents (GST certificate, company incorporation, or equivalent)</li>
+        <li>Government-issued identity proof of the primary account holder or authorized signatory</li>
+        <li>Proof of address (registered business address)</li>
+        <li>Active business website or verifiable digital presence</li>
+        <li>Declaration of intended use case for WhatsApp messaging</li>
+      </ul>
+      <p>ThatMatter may engage a third-party verification partner to validate documents. Submission of false or fraudulent documents will result in immediate account termination and may be reported to relevant authorities.</p>
+      <p>BGV is typically completed within 2 to 5 business days of document submission.</p>
+    </div>
+    <div class="section" id="conduct">
+      <div class="section-num">09</div>
+      <h2>Acceptable Use Policy</h2>
+      <p>You agree not to use ThatMatter to send:</p>
+      <ul class="doc-list">
+        <li>Spam or unsolicited messages to non-opted-in contacts</li>
+        <li>Content that is illegal, defamatory, abusive, or violates any law</li>
+        <li>Phishing, scam, or fraudulent messages</li>
+        <li>Content that violates Meta's WhatsApp Business Policy</li>
+        <li>Political propaganda or misinformation</li>
+      </ul>
+      <p>Violation of this policy will result in immediate account suspension. No refund of prepaid credits will be issued in such cases.</p>
+    </div>
+    <div class="section" id="termination">
+      <div class="section-num">10</div>
+      <h2>Termination</h2>
+      <p>ThatMatter may suspend or terminate your account without notice if you breach these Terms. You may close your account at any time by contacting support. Upon termination due to violation, remaining prepaid credits are forfeited and non-refundable unless required otherwise by applicable law.</p>
+    </div>
+    <div class="section" id="liability">
+      <div class="section-num">11</div>
+      <h2>Limitation of Liability</h2>
+      <p>ThatMatter shall not be held liable for message delivery failures attributable to Meta/WhatsApp's infrastructure, network outages, or changes in WhatsApp Business API policies. Our maximum liability shall not exceed the credits remaining in your account at the time of the incident.</p>
+    </div>
+    <div class="section" id="changes">
+      <div class="section-num">12</div>
+      <h2>Changes to Terms</h2>
+      <p>ThatMatter reserves the right to modify these Terms at any time. Changes will be communicated via email and in-app notifications at least 14 days before taking effect. Continued use of the platform after changes take effect constitutes acceptance of the updated Terms.</p>
+    </div>
+    <div class="section" id="contact">
+      <div class="section-num">13</div>
+      <h2>Contact Us</h2>
+      <p>For questions about these Terms, please contact:</p>
+      <ul class="doc-list">
+        <li>Email: support@thatmatter.in</li>
+        <li>Support Portal: app.thatmatter.in/support</li>
+        <li>Registered Address: 2nd Floor, Devanahalli, Bangalore, Karnataka, India</li>
+      </ul>
+    </div>
+  </main>
+</div>
+<footer>
+  <p>2026 ThatMatter Technologies Pvt. Ltd. &nbsp;|&nbsp; <a href="privacy-policy.html">Privacy Policy</a> &nbsp;|&nbsp; Terms &amp; Conditions</p>
+</footer>
+</body>
+</html>

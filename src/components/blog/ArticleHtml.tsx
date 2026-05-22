@@ -1,4 +1,4 @@
-import type { BlogPost } from '@/content/blog';
+import type { BlogPost } from '@/types/blog';
 
 type ArticleHtmlProps = {
   html: string;

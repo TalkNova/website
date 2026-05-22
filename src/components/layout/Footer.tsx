@@ -48,12 +48,12 @@ export function Footer() {
           <div>
             <h4 className="font-display text-sm font-semibold text-white">Legal</h4>
             <div className="mt-4 flex flex-col gap-2">
-              <a href="#" className="text-sm text-slate-400 hover:text-wa">
+              <Link href="/privacy-policy" className="text-sm text-slate-400 hover:text-wa">
                 Privacy
-              </a>
-              <a href="#" className="text-sm text-slate-400 hover:text-wa">
+              </Link>
+              <Link href="/terms-and-conditions" className="text-sm text-slate-400 hover:text-wa">
                 Terms
-              </a>
+              </Link>
             </div>
           </div>
         </div>

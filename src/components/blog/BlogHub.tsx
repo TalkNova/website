@@ -1,8 +1,8 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import type { BlogPost } from '@/content/blog';
+import type { BlogPost } from '@/types/blog';
 import { BlogAmbient } from '@/components/blog/BlogAmbient';
 import { BlogHero } from '@/components/blog/BlogHero';
 import { BlogFeatured } from '@/components/blog/BlogFeatured';
@@ -12,35 +12,73 @@ import { BlogSidebar } from '@/components/blog/BlogSidebar';
 
 type BlogHubProps = {
   posts: BlogPost[];
-  featured: BlogPost;
+  featured: BlogPost | null;
   categories: string[];
   popular: BlogPost[];
 };
 
-function matchesQuery(post: BlogPost, query: string): boolean {
-  const q = query.trim().toLowerCase();
-  if (!q) return true;
-  return (
-    post.title.toLowerCase().includes(q) ||
-    post.excerpt.toLowerCase().includes(q) ||
-    post.category.toLowerCase().includes(q) ||
-    post.tags.some((t) => t.toLowerCase().includes(q))
-  );
-}
-
-export function BlogHub({ posts, featured, categories, popular }: BlogHubProps) {
+export function BlogHub({ posts: initialPosts, featured, categories, popular }: BlogHubProps) {
   const [query, setQuery] = useState('');
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
+  const [posts, setPosts] = useState(initialPosts);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setPosts(initialPosts);
+  }, [initialPosts]);
+
+  const fetchFiltered = useCallback(async (q: string, category: string | null) => {
+    const trimmed = q.trim();
+    if (!trimmed && !category) {
+      setPosts(initialPosts);
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const params = new URLSearchParams({ limit: '50', sort: 'publishedAt' });
+      if (trimmed) params.set('q', trimmed);
+      if (category) params.set('category', category);
+
+      const res = await fetch(`/api/blog/posts?${params}`);
+      if (!res.ok) throw new Error('Failed to fetch');
+      const data = (await res.json()) as { posts: BlogPost[] };
+      setPosts(data.posts ?? []);
+    } catch {
+      setPosts(
+        initialPosts.filter((p) => {
+          if (category && p.category !== category) return false;
+          if (!trimmed) return true;
+          const lower = trimmed.toLowerCase();
+          return (
+            p.title.toLowerCase().includes(lower) ||
+            p.excerpt.toLowerCase().includes(lower) ||
+            p.category.toLowerCase().includes(lower) ||
+            p.tags.some((t) => t.toLowerCase().includes(lower))
+          );
+        }),
+      );
+    } finally {
+      setLoading(false);
+    }
+  }, [initialPosts]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      void fetchFiltered(query, activeCategory);
+    }, 300);
+    return () => clearTimeout(timer);
+  }, [query, activeCategory, fetchFiltered]);
 
   const filtered = useMemo(() => {
+    const featuredSlug = featured?.slug;
     return posts.filter((p) => {
-      if (p.slug === featured.slug && !query && !activeCategory) return false;
-      if (activeCategory && p.category !== activeCategory) return false;
-      return matchesQuery(p, query);
+      if (featuredSlug && p.slug === featuredSlug && !query && !activeCategory) return false;
+      return true;
     });
-  }, [posts, featured.slug, query, activeCategory]);
+  }, [posts, featured?.slug, query, activeCategory]);
 
-  const showFeatured = !query && !activeCategory;
+  const showFeatured = Boolean(featured) && !query && !activeCategory;
 
   return (
     <motion.div className="relative min-h-screen">
@@ -56,7 +94,7 @@ export function BlogHub({ posts, featured, categories, popular }: BlogHubProps) 
       <div className="mx-auto max-w-7xl px-4 pb-24 sm:px-6 lg:px-8">
         <div className="grid gap-10 lg:grid-cols-[1fr_300px] lg:gap-12">
           <div className="min-w-0 space-y-12">
-            {showFeatured ? (
+            {showFeatured && featured ? (
               <section aria-labelledby="featured-heading">
                 <h2 id="featured-heading" className="sr-only">
                   Featured article
@@ -74,12 +112,12 @@ export function BlogHub({ posts, featured, categories, popular }: BlogHubProps) 
                   {query || activeCategory ? 'Results' : 'Latest articles'}
                 </h2>
                 <p className="text-sm text-slate-500">
-                  {filtered.length} article{filtered.length === 1 ? '' : 's'}
+                  {loading ? 'Searching…' : `${filtered.length} article${filtered.length === 1 ? '' : 's'}`}
                 </p>
               </motion.div>
 
               <AnimatePresence mode="wait">
-                {filtered.length === 0 ? (
+                {filtered.length === 0 && !loading ? (
                   <motion.p
                     key="empty"
                     initial={{ opacity: 0 }}
@@ -91,7 +129,7 @@ export function BlogHub({ posts, featured, categories, popular }: BlogHubProps) 
                   </motion.p>
                 ) : (
                   <motion.div
-                    key={`${query}-${activeCategory}`}
+                    key={`${query}-${activeCategory}-${loading}`}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
