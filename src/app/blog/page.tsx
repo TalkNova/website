@@ -7,7 +7,7 @@ import {
   getFeaturedPost,
   getPopularPosts,
 } from '@/lib/posts';
-import { fetchBlogPageMeta } from '@/lib/blog-api';
+import { getBlogListingMeta } from '@/lib/posts';
 import { getSiteUrl } from '@/lib/site';
 import { blogListingJsonLd } from '@/lib/blog-jsonld';
 
@@ -15,7 +15,7 @@ export const revalidate = 60;
 
 export async function generateMetadata(): Promise<Metadata> {
   try {
-    const meta = await fetchBlogPageMeta();
+    const meta = await getBlogListingMeta();
     return {
       title: meta.metaTitle,
       description: meta.metaDescription,

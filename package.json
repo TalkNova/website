@@ -8,7 +8,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "legal:extract": "node scripts/legal-extract.mjs"
+    "legal:extract": "node scripts/legal-extract.mjs",
+    "blog:snapshot": "node scripts/blog-snapshot.mjs",
+    "prebuild": "node scripts/blog-snapshot.mjs || true"
   },
   "dependencies": {
     "@tailwindcss/postcss": "^4.3.0",
