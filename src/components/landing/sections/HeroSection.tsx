@@ -3,6 +3,8 @@
 import Link from 'next/link';
 import { motion, type Variants } from 'framer-motion';
 import { ArrowRight, ChevronDown, MessageCircle, Sparkles, BarChart3, Bot } from 'lucide-react';
+import { useTheme } from '@/context/ThemeContext';
+import { cn } from '@/lib/cn';
 
 const particles = Array.from({ length: 18 }, (_, i) => ({
   id: i,
@@ -22,9 +24,11 @@ const fadeUp: Variants = {
 };
 
 export function HeroSection() {
+  const { theme } = useTheme();
+
   return (
     <section className="relative z-10 px-4 pb-24 pt-28 sm:px-6 sm:pb-32 sm:pt-32 lg:px-8 lg:pt-36">
-      {particles.map((p) => (
+      {theme === 'dark' && particles.map((p) => (
         <motion.span
           key={p.id}
           className="pointer-events-none absolute h-1 w-1 rounded-full bg-wa/40"
@@ -41,7 +45,12 @@ export function HeroSection() {
             initial="hidden"
             animate="show"
             variants={fadeUp}
-            className="inline-flex items-center gap-2 rounded-full border border-wa/25 bg-wa/10 px-3 py-1 text-xs font-medium text-wa sm:text-sm"
+            className={cn(
+              "inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-semibold uppercase tracking-wider sm:text-sm transition duration-300",
+              theme === 'dark'
+                ? "border-wa/25 bg-wa/10 text-wa"
+                : "border-black/10 bg-black/5 text-black"
+            )}
           >
             <Sparkles className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
             AI + WhatsApp Business API
@@ -52,10 +61,15 @@ export function HeroSection() {
             initial="hidden"
             animate="show"
             variants={fadeUp}
-            className="mt-6 font-display text-4xl font-bold leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-[3.35rem] xl:text-6xl"
+            className={cn(
+              "mt-6 font-display text-4xl font-black leading-[1.08] tracking-tight transition duration-500 sm:text-5xl lg:text-[3.35rem] xl:text-6xl",
+              theme === 'dark' ? "text-white" : "text-black"
+            )}
           >
             Automate Your Business on{' '}
-            <span className="text-gradient-wa">WhatsApp with AI</span>
+            <span className={theme === 'dark' ? "text-gradient-wa" : "underline decoration-black decoration-[3px] underline-offset-[6px]"}>
+              WhatsApp with AI
+            </span>
           </motion.h1>
 
           <motion.p
@@ -63,7 +77,10 @@ export function HeroSection() {
             initial="hidden"
             animate="show"
             variants={fadeUp}
-            className="mt-6 max-w-xl text-base leading-relaxed text-slate-400 sm:text-lg"
+            className={cn(
+              "mt-6 max-w-xl text-base leading-relaxed transition duration-500 sm:text-lg",
+              theme === 'dark' ? "text-slate-400" : "text-gray-600 font-medium"
+            )}
           >
             Convert more leads, automate customer conversations, and grow sales 24/7 with
             AI-powered WhatsApp automation, verified templates, and dedicated launch support.
@@ -78,7 +95,12 @@ export function HeroSection() {
           >
             <Link
               href="/contact"
-              className="group inline-flex items-center gap-2 rounded-full bg-wa px-6 py-3.5 text-sm font-semibold text-canvas shadow-[0_0_40px_-6px_rgb(37_211_102/0.65)] transition hover:bg-wa-dim sm:text-base"
+              className={cn(
+                "group inline-flex items-center gap-2 rounded-full px-6 py-3.5 text-sm font-semibold transition duration-300 sm:text-base",
+                theme === 'dark'
+                  ? "bg-wa text-canvas shadow-[0_0_40px_-6px_rgb(37_211_102/0.65)] hover:bg-wa-dim"
+                  : "bg-black text-white hover:bg-gray-900 shadow-sm"
+              )}
             >
               Book free demo
               <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
@@ -87,7 +109,12 @@ export function HeroSection() {
               href="https://wa.me/917483358716"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.04] px-6 py-3.5 text-sm font-semibold text-white backdrop-blur transition hover:border-wa/40 hover:bg-white/[0.07] sm:text-base"
+              className={cn(
+                "inline-flex items-center gap-2 rounded-full border px-6 py-3.5 text-sm font-semibold transition duration-300 sm:text-base",
+                theme === 'dark'
+                  ? "border-white/15 bg-white/[0.04] text-white hover:border-wa/40 hover:bg-white/[0.07]"
+                  : "border-black bg-white text-black hover:bg-black hover:text-white"
+              )}
             >
               <MessageCircle className="h-4 w-4 text-wa" />
               Chat on WhatsApp
@@ -99,7 +126,10 @@ export function HeroSection() {
             initial="hidden"
             animate="show"
             variants={fadeUp}
-            className="mt-8 text-xs text-slate-500 sm:text-sm"
+            className={cn(
+              "mt-8 text-xs transition duration-300 sm:text-sm",
+              theme === 'dark' ? "text-slate-500" : "text-gray-500 font-semibold"
+            )}
           >
             WhatsApp Business API · Verified templates · Enterprise-grade security
           </motion.p>
@@ -111,19 +141,41 @@ export function HeroSection() {
           transition={{ delay: 0.35, duration: 0.65, ease: [0.22, 1, 0.36, 1] as const }}
           className="relative"
         >
-          <div className="absolute -inset-4 rounded-[2rem] bg-gradient-to-br from-wa/20 via-accent-emerald/10 to-accent-cyan/15 blur-2xl" />
-          <div className="relative overflow-hidden rounded-[1.75rem] border border-white/[0.08] glass-panel p-5 shadow-card sm:p-6">
-            <div className="flex items-center justify-between border-b border-white/[0.06] pb-4">
+          {theme === 'dark' && (
+            <div className="absolute -inset-4 rounded-[2rem] bg-gradient-to-br from-wa/20 via-accent-emerald/10 to-accent-cyan/15 blur-2xl" />
+          )}
+          <div className={cn(
+            "relative overflow-hidden rounded-[1.75rem] border p-5 shadow-md sm:p-6 transition duration-500",
+            theme === 'dark'
+              ? "border-white/[0.08] glass-panel shadow-card"
+              : "border-black/[0.08] bg-white shadow-lg"
+          )}>
+            <div className={cn(
+              "flex items-center justify-between border-b pb-4 transition duration-300",
+              theme === 'dark' ? "border-white/[0.06]" : "border-black/[0.06]"
+            )}>
               <div className="flex items-center gap-3">
-                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-wa/20 text-wa">
+                <div className={cn(
+                  "flex h-11 w-11 items-center justify-center rounded-xl transition duration-300",
+                  theme === 'dark' ? "bg-wa/20 text-wa" : "bg-black/5 text-black"
+                )}>
                   <Bot className="h-6 w-6" />
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-white">ThatMatter AI</p>
-                  <p className="text-xs text-wa">● Active · replies in &lt;2s</p>
+                  <p className={cn(
+                    "text-sm font-black transition duration-300",
+                    theme === 'dark' ? "text-white" : "text-black"
+                  )}>ThatMatter AI</p>
+                  <p className={cn(
+                    "text-xs transition duration-300",
+                    theme === 'dark' ? "text-wa" : "text-black font-semibold"
+                  )}>● Active · replies in &lt;2s</p>
                 </div>
               </div>
-              <BarChart3 className="h-5 w-5 text-slate-500" />
+              <BarChart3 className={cn(
+                "h-5 w-5 transition duration-300",
+                theme === 'dark' ? "text-slate-500" : "text-gray-400"
+              )} />
             </div>
             <div className="mt-4 space-y-3">
               {[
@@ -136,17 +188,22 @@ export function HeroSection() {
                   initial={{ opacity: 0, x: m.side === 'user' ? 12 : -12 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.9 + i * 0.35, duration: 0.4 }}
-                  className={
+                  className={cn(
+                    "px-4 py-3 text-sm transition duration-300",
                     m.side === 'user'
-                      ? 'ml-8 rounded-2xl rounded-br-md bg-surface px-4 py-3 text-sm text-slate-200'
-                      : 'mr-8 rounded-2xl rounded-bl-md bg-wa/15 px-4 py-3 text-sm text-slate-100 ring-1 ring-wa/25'
-                  }
+                      ? theme === 'dark'
+                        ? 'ml-8 rounded-2xl rounded-br-md bg-surface text-slate-200'
+                        : 'ml-8 rounded-2xl rounded-br-md bg-gray-100 text-gray-800 font-semibold'
+                      : theme === 'dark'
+                        ? 'mr-8 rounded-2xl rounded-bl-md bg-wa/15 text-slate-100 ring-1 ring-wa/25'
+                        : 'mr-8 rounded-2xl rounded-bl-md bg-black text-white font-medium'
+                  )}
                 >
                   {m.text}
                 </motion.div>
               ))}
             </div>
-            <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-3">
+            <div className="mt-5 grid grid-cols-3 gap-3">
               {[
                 { k: 'Open rate', v: '72%' },
                 { k: 'Leads / wk', v: '184' },
@@ -154,10 +211,21 @@ export function HeroSection() {
               ].map((c) => (
                 <div
                   key={c.k}
-                  className="rounded-xl border border-white/[0.06] bg-canvas/50 px-3 py-3 text-center"
+                  className={cn(
+                    "rounded-xl border px-3 py-3 text-center transition duration-300",
+                    theme === 'dark'
+                      ? "border-white/[0.06] bg-canvas/50"
+                      : "border-black/[0.06] bg-gray-50"
+                  )}
                 >
-                  <p className="text-lg font-bold text-white">{c.v}</p>
-                  <p className="text-[10px] uppercase tracking-wider text-slate-500">{c.k}</p>
+                  <p className={cn(
+                    "text-lg font-black transition duration-300",
+                    theme === 'dark' ? "text-white" : "text-black"
+                  )}>{c.v}</p>
+                  <p className={cn(
+                    "text-[10px] uppercase tracking-wider transition duration-300",
+                    theme === 'dark' ? "text-slate-500" : "text-gray-500 font-semibold"
+                  )}>{c.k}</p>
                 </div>
               ))}
             </div>
@@ -170,8 +238,11 @@ export function HeroSection() {
         animate={{ y: [0, 6, 0] }}
         transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
       >
-        <a href="#trust" className="flex flex-col items-center gap-1 text-slate-500">
-          <span className="text-xs uppercase tracking-widest">Explore</span>
+        <a href="#trust" className={cn(
+          "flex flex-col items-center gap-1 transition duration-300",
+          theme === 'dark' ? "text-slate-500" : "text-gray-500"
+        )}>
+          <span className="text-xs uppercase tracking-widest font-semibold">Explore</span>
           <ChevronDown className="h-5 w-5" />
         </a>
       </motion.div>

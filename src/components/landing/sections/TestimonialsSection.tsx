@@ -3,6 +3,8 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Quote } from 'lucide-react';
+import { useTheme } from '@/context/ThemeContext';
+import { cn } from '@/lib/cn';
 
 const slides = [
   {
@@ -25,20 +27,35 @@ const slides = [
 
 export function TestimonialsSection() {
   const [i, setI] = useState(0);
+  const { theme } = useTheme();
   const prev = () => setI((x) => (x - 1 + slides.length) % slides.length);
   const next = () => setI((x) => (x + 1) % slides.length);
 
   return (
-    <section className="relative z-10 py-20 sm:py-28">
+    <section className="relative z-10 py-20 sm:py-28 transition-colors duration-500">
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-        <p className="text-center text-xs font-semibold uppercase tracking-[0.2em] text-wa">
+        <p className={cn(
+          "text-center text-xs font-semibold uppercase tracking-[0.2em] transition duration-300",
+          theme === 'dark' ? "text-wa" : "text-black"
+        )}>
           Testimonials
         </p>
-        <h2 className="mt-2 text-center font-display text-3xl font-bold text-white sm:text-4xl">
+        <h2 className={cn(
+          "mt-2 text-center font-display text-3xl font-black transition duration-500 sm:text-4xl",
+          theme === 'dark' ? "text-white" : "text-black"
+        )}>
           Loved by teams who ship
         </h2>
-        <div className="relative mt-12 overflow-hidden rounded-3xl border border-white/[0.08] bg-surface/30 p-8 sm:p-12">
-          <Quote className="absolute right-8 top-8 h-10 w-10 text-wa/20" />
+        <div className={cn(
+          "relative mt-12 overflow-hidden rounded-3xl border p-8 sm:p-12 transition duration-500",
+          theme === 'dark'
+            ? "border-white/[0.08] bg-surface/30"
+            : "border-black/[0.08] bg-white shadow-lg"
+        )}>
+          <Quote className={cn(
+            "absolute right-8 top-8 h-10 w-10 transition duration-300",
+            theme === 'dark' ? "text-wa/20" : "text-black/10"
+          )} />
           <AnimatePresence mode="wait">
             <motion.div
               key={i}
@@ -47,12 +64,21 @@ export function TestimonialsSection() {
               exit={{ opacity: 0, x: -24 }}
               transition={{ duration: 0.35 }}
             >
-              <p className="font-display text-xl font-medium leading-relaxed text-slate-100 sm:text-2xl">
+              <p className={cn(
+                "font-display text-xl font-medium leading-relaxed transition duration-300 sm:text-2xl",
+                theme === 'dark' ? "text-slate-100" : "text-black"
+              )}>
                 “{slides[i].quote}”
               </p>
               <div className="mt-8">
-                <p className="font-semibold text-white">{slides[i].name}</p>
-                <p className="text-sm text-slate-400">{slides[i].role}</p>
+                <p className={cn(
+                  "font-bold transition duration-300",
+                  theme === 'dark' ? "text-white" : "text-black"
+                )}>{slides[i].name}</p>
+                <p className={cn(
+                  "text-sm transition duration-300",
+                  theme === 'dark' ? "text-slate-400" : "text-gray-600 font-medium"
+                )}>{slides[i].role}</p>
               </div>
             </motion.div>
           </AnimatePresence>
@@ -60,7 +86,12 @@ export function TestimonialsSection() {
             <button
               type="button"
               onClick={prev}
-              className="rounded-full border border-white/10 p-2 text-slate-300 transition hover:border-wa/40 hover:text-wa"
+              className={cn(
+                "rounded-full border p-2 transition duration-300",
+                theme === 'dark'
+                  ? "border-white/10 text-slate-300 hover:border-wa/40 hover:text-wa"
+                  : "border-black/10 text-black hover:border-black"
+              )}
               aria-label="Previous testimonial"
             >
               <ChevronLeft className="h-5 w-5" />
@@ -71,9 +102,12 @@ export function TestimonialsSection() {
                   key={idx}
                   type="button"
                   onClick={() => setI(idx)}
-                  className={`h-2 rounded-full transition ${
-                    idx === i ? 'w-8 bg-wa' : 'w-2 bg-white/20 hover:bg-white/35'
-                  }`}
+                  className={cn(
+                    "h-2 rounded-full transition duration-300",
+                    idx === i
+                      ? theme === 'dark' ? 'w-8 bg-wa' : 'w-8 bg-black'
+                      : theme === 'dark' ? 'w-2 bg-white/20 hover:bg-white/35' : 'w-2 bg-black/20 hover:bg-black/35'
+                  )}
                   aria-label={`Go to testimonial ${idx + 1}`}
                 />
               ))}
@@ -81,7 +115,12 @@ export function TestimonialsSection() {
             <button
               type="button"
               onClick={next}
-              className="rounded-full border border-white/10 p-2 text-slate-300 transition hover:border-wa/40 hover:text-wa"
+              className={cn(
+                "rounded-full border p-2 transition duration-300",
+                theme === 'dark'
+                  ? "border-white/10 text-slate-300 hover:border-wa/40 hover:text-wa"
+                  : "border-black/10 text-black hover:border-black"
+              )}
               aria-label="Next testimonial"
             >
               <ChevronRight className="h-5 w-5" />
