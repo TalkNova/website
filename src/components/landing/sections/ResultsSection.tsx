@@ -2,6 +2,8 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
+import { useTheme } from '@/context/ThemeContext';
+import { cn } from '@/lib/cn';
 
 const stats = [
   { label: 'Faster replies', value: 80, suffix: '%' },
@@ -14,10 +16,12 @@ function AnimatedNumber({
   value,
   suffix,
   enabled,
+  theme,
 }: {
   value: number;
   suffix: string;
   enabled: boolean;
+  theme: 'light' | 'dark';
 }) {
   const [n, setN] = useState(0);
 
@@ -39,7 +43,10 @@ function AnimatedNumber({
 
   return (
     <span
-      className="font-display text-4xl font-bold text-white sm:text-5xl"
+      className={cn(
+        "font-display text-4xl font-black transition duration-300 sm:text-5xl",
+        theme === 'dark' ? "text-white" : "text-black"
+      )}
       suppressHydrationWarning
     >
       {n}
@@ -51,12 +58,21 @@ function AnimatedNumber({
 export function ResultsSection() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-20%' });
+  const { theme } = useTheme();
 
   return (
-    <section id="results" className="relative z-10 py-20 sm:py-28">
+    <section id="results" className="relative z-10 py-20 sm:py-28 transition-colors duration-500">
       <div ref={ref} className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-wa">Outcomes</p>
-        <h2 className="mt-2 font-display text-3xl font-bold text-white sm:text-4xl">
+        <p className={cn(
+          "text-xs font-semibold uppercase tracking-[0.2em] transition duration-300",
+          theme === 'dark' ? "text-wa" : "text-black"
+        )}>
+          Outcomes
+        </p>
+        <h2 className={cn(
+          "mt-2 font-display text-3xl font-black transition duration-500 sm:text-4xl",
+          theme === 'dark' ? "text-white" : "text-black"
+        )}>
           Numbers teams feel within the first quarter
         </h2>
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -66,10 +82,20 @@ export function ResultsSection() {
               initial={{ opacity: 0, y: 16 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: i * 0.08 }}
-              className="rounded-2xl border border-white/[0.07] bg-surface/35 p-6 text-center backdrop-blur-sm"
+              className={cn(
+                "rounded-2xl border p-6 text-center backdrop-blur-sm transition duration-300",
+                theme === 'dark'
+                  ? "border-white/[0.07] bg-surface/35"
+                  : "border-black/[0.08] bg-white shadow-sm"
+              )}
             >
-              <AnimatedNumber value={s.value} suffix={s.suffix} enabled={inView} />
-              <p className="mt-2 text-sm text-slate-400">{s.label}</p>
+              <AnimatedNumber value={s.value} suffix={s.suffix} enabled={inView} theme={theme} />
+              <p className={cn(
+                "mt-2 text-sm transition duration-300",
+                theme === 'dark' ? "text-slate-400" : "text-gray-600 font-semibold"
+              )}>
+                {s.label}
+              </p>
             </motion.div>
           ))}
         </div>

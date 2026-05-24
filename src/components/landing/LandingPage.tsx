@@ -16,11 +16,16 @@ import { IndustriesSection } from '@/components/landing/sections/IndustriesSecti
 import { TestimonialsSection } from '@/components/landing/sections/TestimonialsSection';
 import { FAQSection } from '@/components/landing/sections/FAQSection';
 import { FinalCTASection } from '@/components/landing/sections/FinalCTASection';
+import { useTheme } from '@/context/ThemeContext';
 
 export function LandingPage() {
+  const { theme } = useTheme();
+
   return (
-    <div className="relative min-h-screen overflow-x-hidden bg-canvas">
-      <AmbientBackground />
+    <div className={`relative min-h-screen overflow-x-hidden transition-colors duration-500 ${
+      theme === 'dark' ? 'bg-canvas text-slate-100' : 'bg-white text-gray-900'
+    }`}>
+      {theme === 'dark' && <AmbientBackground />}
       <LandingNavbar />
       <main>
         <HeroSection />
