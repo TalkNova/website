@@ -19,8 +19,8 @@ const outfit = Outfit({
 export const metadata: Metadata = {
   metadataBase: getSiteUrl(),
   title: {
-    default: 'ThatMatter — AI WhatsApp Automation for Business',
-    template: '%s | ThatMatter',
+    default: 'Thatmatters — AI WhatsApp Automation for Business',
+    template: '%s | Thatmatters',
   },
   description:
     'AI-powered WhatsApp Business automation, custom chatbots, verified templates, campaigns, and lead generation — with full setup and 24/7 support.',
@@ -30,14 +30,14 @@ export const metadata: Metadata = {
     'AI chatbot',
     'marketing campaigns',
     'lead generation',
-    'ThatMatter',
+    'Thatmatters',
   ],
   icons: { icon: '/favicon.png' },
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    siteName: 'ThatMatter',
-    title: 'ThatMatter — AI WhatsApp Automation for Business',
+    siteName: 'Thatmatters',
+    title: 'Thatmatters — AI WhatsApp Automation for Business',
     description:
       'Automate conversations, campaigns, and lead capture on WhatsApp with AI — built for teams that ship.',
   },

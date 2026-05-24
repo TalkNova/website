@@ -119,7 +119,7 @@ export function HeroSection() {
                   <Bot className="h-6 w-6" />
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-white">ThatMatter AI</p>
+                  <p className="text-sm font-semibold text-white">Thatmatters AI</p>
                   <p className="text-xs text-wa">● Active · replies in &lt;2s</p>
                 </div>
               </div>

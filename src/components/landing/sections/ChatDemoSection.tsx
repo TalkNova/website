@@ -63,7 +63,7 @@ export function ChatDemoSection() {
                 <Bot className="h-5 w-5" />
               </div>
               <div>
-                <p className="text-sm font-semibold text-white">ThatMatter Assistant</p>
+                <p className="text-sm font-semibold text-white">Thatmatters Assistant</p>
                 <p className="text-xs text-wa">typing… live demo</p>
               </div>
             </div>

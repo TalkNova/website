@@ -78,7 +78,7 @@ export function BlogPostLayout({ post, html, headings, related, shareUrl }: Blog
                 </div>
                 <div>
                   <p className="font-semibold text-white">{post.author.name}</p>
-                  <p className="text-sm text-slate-500">ThatMatter Team</p>
+                  <p className="text-sm text-slate-500">Thatmatters Team</p>
                 </div>
               </div>
             ) : null}

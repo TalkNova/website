@@ -36,7 +36,7 @@ export async function generateMetadata(): Promise<Metadata> {
     return {
       title: 'Blog — AI Automation & WhatsApp Growth Insights',
       description:
-        'Learn AI automation, WhatsApp marketing, chatbot systems, and customer engagement strategies from the ThatMatter team.',
+        'Learn AI automation, WhatsApp marketing, chatbot systems, and customer engagement strategies from the Thatmatters team.',
       alternates: { canonical: '/blog' },
     };
   }

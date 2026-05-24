@@ -52,7 +52,7 @@ async function main() {
   let meta = {
     metaTitle: 'Blog — AI Automation & WhatsApp Growth Insights',
     metaDescription:
-      'Learn AI automation, WhatsApp marketing, chatbot systems, and customer engagement strategies from the ThatMatter team.',
+      'Learn AI automation, WhatsApp marketing, chatbot systems, and customer engagement strategies from the Thatmatters team.',
   };
   try {
     meta = await apiGet('/blog/meta');

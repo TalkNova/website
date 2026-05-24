@@ -28,7 +28,7 @@ export function LoginForm() {
         <Link href="/" className="inline-flex justify-center">
           <Image
             src="/images/logo.png"
-            alt="ThatMatter"
+            alt="Thatmatters"
             width={200}
             height={72}
             className="h-12 w-auto"

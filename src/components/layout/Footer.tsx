@@ -10,7 +10,7 @@ export function Footer() {
             <Link href="/" className="inline-block">
               <Image
                 src="/images/logo.png"
-                alt="ThatMatter"
+                alt="Thatmatters"
                 width={200}
                 height={72}
                 className="h-12 w-auto"
@@ -58,7 +58,7 @@ export function Footer() {
           </div>
         </div>
         <div className="mt-10 border-t border-white/[0.06] pt-8 text-center text-sm text-slate-500">
-          <p>&copy; {new Date().getFullYear()} ThatMatter. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Thatmatters. All rights reserved.</p>
         </div>
       </div>
     </footer>

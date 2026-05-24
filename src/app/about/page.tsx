@@ -43,7 +43,7 @@ export default function AboutPage() {
               experience.
             </p>
             <p className="mt-4 text-slate-400">
-              ThatMatter was built to solve this exact problem. By combining powerful marketing
+              Thatmatters was built to solve this exact problem. By combining powerful marketing
               automation with a robust ticketing system, we empower teams to deliver exceptional
               service right where their customers already are.
             </p>

@@ -23,7 +23,7 @@ export function LandingFooter() {
       <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
           <div className="lg:col-span-1">
-            <p className="font-display text-xl font-bold text-white">ThatMatter</p>
+            <p className="font-display text-xl font-bold text-white">Thatmatters</p>
             <p className="mt-3 max-w-xs text-sm leading-relaxed text-slate-400">
               AI-powered WhatsApp Business automation, verified templates, and full-stack support
               for teams that want to scale conversations.
@@ -90,7 +90,7 @@ export function LandingFooter() {
         </div>
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/[0.06] pt-8 text-sm text-slate-500 sm:flex-row">
           <p suppressHydrationWarning>
-            &copy; {new Date().getFullYear()} ThatMatter. All rights reserved.
+            &copy; {new Date().getFullYear()} Thatmatters. All rights reserved.
           </p>
           <div className="flex gap-6">
             <Link href="/privacy-policy" className="hover:text-slate-300">

@@ -7,7 +7,7 @@ import { ChevronLeft, ChevronRight, Quote } from 'lucide-react';
 const slides = [
   {
     quote:
-      'We replaced three tools with ThatMatter. CSAT is up and our team finally sleeps at night.',
+      'We replaced three tools with Thatmatters. CSAT is up and our team finally sleeps at night.',
     name: 'Priya N.',
     role: 'COO, Series B SaaS',
   },

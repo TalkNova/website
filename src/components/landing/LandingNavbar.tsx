@@ -47,7 +47,7 @@ export function LandingNavbar({ scrolledInitially = false }: LandingNavbarProps)
         <Link href="/" className="flex items-center gap-2.5">
           <Image
             src="/images/logo.png"
-            alt="ThatMatter"
+            alt="Thatmatters"
             width={140}
             height={48}
             className="h-9 w-auto sm:h-10"

@@ -5,7 +5,7 @@ export function blogListingJsonLd(siteUrl: string, posts: BlogPost[]) {
   return {
     '@context': 'https://schema.org',
     '@type': 'Blog',
-    name: 'ThatMatter AI & WhatsApp Insights',
+    name: 'Thatmatters AI & WhatsApp Insights',
     description:
       'AI automation, WhatsApp marketing, chatbot systems, and customer engagement strategies.',
     url: `${siteUrl}/blog`,
@@ -46,7 +46,7 @@ export function blogPostJsonLd(siteUrl: string, post: BlogPost) {
     },
     publisher: {
       '@type': 'Organization',
-      name: 'ThatMatter',
+      name: 'Thatmatters',
     },
     keywords: post.tags.join(', '),
   };

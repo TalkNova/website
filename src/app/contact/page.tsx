@@ -5,7 +5,7 @@ import { Mail, MessageCircle } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Contact Us',
-  description: 'Get in touch with the ThatMatter team.',
+  description: 'Get in touch with the Thatmatters team.',
 };
 
 export default function ContactPage() {
@@ -28,7 +28,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <p className="font-medium text-white">Email us</p>
-                  <p className="text-sm text-slate-400">support@thatmatter.com</p>
+                  <p className="text-sm text-slate-400">support@thatmatters.com</p>
                 </div>
               </div>
               <div className="flex items-center gap-4">
