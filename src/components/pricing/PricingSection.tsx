@@ -151,8 +151,12 @@ const planData: Record<'marketing' | 'utility' | 'authentication', PlanGroup> = 
 };
 
 // Starter Icon: Target Reticle
-const StarterIcon = ({ theme }: { theme: 'light' | 'dark' }) => {
-  const iconColor = theme === 'dark' ? 'text-slate-400 group-hover:text-wa transition-colors duration-300' : 'text-gray-700 group-hover:text-white transition-colors duration-300';
+const StarterIcon = ({ theme, active }: { theme: 'light' | 'dark'; active: boolean }) => {
+  const iconColor = theme === 'dark'
+    ? active
+      ? 'text-[#25d366] transition-colors duration-300'
+      : 'text-slate-400 group-hover:text-wa transition-colors duration-300'
+    : active ? 'text-white' : 'text-gray-700 group-hover:text-white transition-colors duration-300';
   return (
     <div className="relative flex items-center justify-center w-12 h-12 mx-auto transition-transform duration-300 group-hover:scale-110">
       <span className={`absolute top-0 left-1 w-1 h-1 rounded-full ${theme === 'dark' ? 'bg-[#25d366]/40' : 'bg-black/10'}`} />
@@ -166,8 +170,12 @@ const StarterIcon = ({ theme }: { theme: 'light' | 'dark' }) => {
 };
 
 // Professional Icon: Lifebuoy
-const ProfessionalIcon = ({ theme }: { theme: 'light' | 'dark' }) => {
-  const iconColor = theme === 'dark' ? 'text-slate-400 group-hover:text-wa transition-colors duration-300' : 'text-gray-700 group-hover:text-white transition-colors duration-300';
+const ProfessionalIcon = ({ theme, active }: { theme: 'light' | 'dark'; active: boolean }) => {
+  const iconColor = theme === 'dark'
+    ? active
+      ? 'text-[#25d366] transition-colors duration-300'
+      : 'text-slate-400 group-hover:text-wa transition-colors duration-300'
+    : active ? 'text-white' : 'text-gray-700 group-hover:text-white transition-colors duration-300';
   return (
     <div className="relative flex items-center justify-center w-12 h-12 mx-auto transition-transform duration-300 group-hover:scale-110">
       <span className={`absolute top-0 left-1 w-1.5 h-1.5 rounded-full ${theme === 'dark' ? 'bg-[#22d3ee]/40' : 'bg-black/10'}`} />
@@ -180,9 +188,13 @@ const ProfessionalIcon = ({ theme }: { theme: 'light' | 'dark' }) => {
   );
 };
 
-// Platinum Icon: Settings Gear
-const PlatinumIcon = ({ theme }: { theme: 'light' | 'dark' }) => {
-  const iconColor = theme === 'dark' ? 'text-slate-400 group-hover:text-wa transition-colors duration-300' : 'text-gray-700 group-hover:text-white transition-colors duration-300';
+// Platinum/Hypergrowth Icon: Settings Gear
+const PlatinumIcon = ({ theme, active }: { theme: 'light' | 'dark'; active: boolean }) => {
+  const iconColor = theme === 'dark'
+    ? active
+      ? 'text-[#25d366] transition-colors duration-300'
+      : 'text-slate-400 group-hover:text-wa transition-colors duration-300'
+    : active ? 'text-white' : 'text-gray-700 group-hover:text-white transition-colors duration-300';
   return (
     <div className="relative flex items-center justify-center w-12 h-12 mx-auto transition-transform duration-300 group-hover:scale-110">
       <span className={`absolute top-1 right-1 w-1 h-1 rounded-full ${theme === 'dark' ? 'bg-[#25d366]' : 'bg-black'}`} />
@@ -196,6 +208,7 @@ const PlatinumIcon = ({ theme }: { theme: 'light' | 'dark' }) => {
 
 export function PricingSection() {
   const [activeTab, setActiveTab] = useState<'marketing' | 'utility' | 'authentication'>('marketing');
+  const [hoveredPlan, setHoveredPlan] = useState<PlanName | null>(null);
   const { theme } = useTheme();
 
   const currentGroup = planData[activeTab];
@@ -248,15 +261,31 @@ export function PricingSection() {
         {/* Pricing Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch mt-6">
           {currentGroup.plans.map((plan) => {
-            // Interactive Card Styles on hover only
-            const cardClasses = 'group relative flex flex-col justify-between rounded-3xl border border-white/[0.08] hover:border-wa/40 bg-[#0b0f19]/80 hover:bg-gradient-to-b hover:from-[#0F2617]/90 hover:to-[#0A111F]/90 text-slate-200 shadow-xl hover:shadow-[0_0_50px_-5px_rgba(37,211,102,0.25)] hover:-translate-y-2 p-8 transition-all duration-500 h-full backdrop-blur-xl';
+            // Determine active highlight: defaults to HYPERGROWTH unless another is hovered
+            const isCurrentlyHighlighted = hoveredPlan
+              ? plan.name === hoveredPlan
+              : plan.name === 'HYPERGROWTH';
 
-            const titleClasses = 'text-center font-display text-sm font-bold tracking-widest uppercase mb-4 text-slate-400 group-hover:text-wa transition-colors duration-300';
+            // Premium Card Styles
+            const cardClasses = isCurrentlyHighlighted
+              ? 'group relative flex flex-col justify-between rounded-3xl border-2 border-wa/40 bg-gradient-to-b from-[#0F2617]/90 to-[#0A111F]/90 text-slate-200 shadow-[0_0_50px_-5px_rgba(37,211,102,0.25)] hover:-translate-y-2 p-8 transition-all duration-500 h-full backdrop-blur-xl'
+              : 'group relative flex flex-col justify-between rounded-3xl border border-white/[0.08] hover:border-wa/30 bg-[#0b0f19]/80 text-slate-200 shadow-xl hover:-translate-y-2 p-8 transition-all duration-500 h-full backdrop-blur-xl';
 
-            const buttonClasses = 'w-full py-3.5 text-center text-xs font-bold uppercase tracking-wider rounded-full border border-white/10 text-white bg-white/5 group-hover:bg-wa group-hover:text-canvas group-hover:border-wa group-hover:shadow-[0_0_24px_-4px_rgb(37_211_102/0.5)] group-hover:scale-[1.02] transition-all duration-300 cursor-pointer';
+            const titleClasses = isCurrentlyHighlighted
+              ? 'text-center font-display text-sm font-bold tracking-widest uppercase mb-4 text-wa transition-colors duration-300'
+              : 'text-center font-display text-sm font-bold tracking-widest uppercase mb-4 text-slate-400 group-hover:text-wa transition-colors duration-300';
+
+            const buttonClasses = isCurrentlyHighlighted
+              ? 'w-full py-3.5 text-center text-xs font-black uppercase tracking-wider rounded-full bg-wa text-canvas shadow-[0_0_24px_-4px_rgb(37_211_102/0.6)] hover:shadow-[0_0_30px_rgb(37_211_102/0.8)] hover:scale-[1.02] transition-all duration-300 cursor-pointer'
+              : 'w-full py-3.5 text-center text-xs font-bold uppercase tracking-wider rounded-full border border-white/10 text-white bg-white/5 hover:bg-wa hover:text-canvas hover:border-wa hover:shadow-[0_0_24px_-4px_rgb(37_211_102/0.5)] hover:scale-[1.02] transition-all duration-300 cursor-pointer';
 
             return (
-              <div key={plan.name} className={cardClasses}>
+              <div
+                key={plan.name}
+                className={cardClasses}
+                onMouseEnter={() => setHoveredPlan(plan.name)}
+                onMouseLeave={() => setHoveredPlan(null)}
+              >
                 
                 {/* Header Info */}
                 <div className="flex flex-col items-center">
@@ -268,9 +297,9 @@ export function PricingSection() {
                   <div className="flex justify-center mb-6 relative">
                     <div className="absolute inset-0 bg-wa/5 rounded-full blur-xl w-16 h-16 mx-auto" />
                     <div className="relative z-10 w-16 h-16 rounded-2xl bg-white/[0.03] border border-white/5 flex items-center justify-center group-hover:border-wa/20 group-hover:bg-wa/5 transition-all duration-300">
-                      {plan.icon === 'starter' && <StarterIcon theme="dark" />}
-                      {plan.icon === 'professional' && <ProfessionalIcon theme="dark" />}
-                      {plan.icon === 'platinum' && <PlatinumIcon theme="dark" />}
+                      {plan.icon === 'starter' && <StarterIcon theme="dark" active={isCurrentlyHighlighted} />}
+                      {plan.icon === 'professional' && <ProfessionalIcon theme="dark" active={isCurrentlyHighlighted} />}
+                      {plan.icon === 'platinum' && <PlatinumIcon theme="dark" active={isCurrentlyHighlighted} />}
                     </div>
                   </div>
 
