@@ -22,7 +22,6 @@ type PlanGroup = {
 
 const starterFeatures = [
   'Lifetime validity — No recurring platform fees',
-  'Free WhatsApp Business API setup',
   'Bulk WhatsApp campaign support',
   'Send promotional & transactional WhatsApp messages',
   'WhatsApp template message support',
