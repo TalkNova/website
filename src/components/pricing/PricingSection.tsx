@@ -21,7 +21,6 @@ type PlanGroup = {
 
 const starterFeatures = [
   'Lifetime validity — No recurring platform fees',
-  'AI-Powered and Rule-based No-Code Chatbot Builder',
   'Bulk WhatsApp campaign support',
   'Send promotional & transactional WhatsApp messages',
   'WhatsApp template message support',
@@ -50,7 +49,7 @@ const platinumFeatures = [
   'Free WhatsApp Business API setup',
   'Priority Blue Tick Verification support',
   'Run bulk WhatsApp marketing campaigns',
-  'AI-Powered No-Code Chatbot Builder',
+  'AI-Powered and Rule-based No-Code Chatbot Builder',
   'Smart automated replies & lead qualification',
   'Click-to-WhatsApp campaign support',
   'Drip campaigns for follow-ups & retargeting',
