@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Check } from 'lucide-react';
 import { useTheme } from '@/context/ThemeContext';
 
-type PlanName = 'STARTER' | 'PROFESSIONAL' | 'PLATINUM';
+type PlanName = 'STARTER' | 'PROFESSIONAL' | 'HYPERGROWTH';
 
 type PlanDetails = {
   name: PlanName;
@@ -16,12 +16,12 @@ type PlanDetails = {
 };
 
 type PlanGroup = {
-  highlighted: PlanName;
   plans: PlanDetails[];
 };
 
 const starterFeatures = [
   'Lifetime validity — No recurring platform fees',
+  'AI-Powered and Rule-based No-Code Chatbot Builder',
   'Bulk WhatsApp campaign support',
   'Send promotional & transactional WhatsApp messages',
   'WhatsApp template message support',
@@ -65,7 +65,6 @@ const platinumFeatures = [
 
 const planData: Record<'marketing' | 'utility' | 'authentication', PlanGroup> = {
   marketing: {
-    highlighted: 'PROFESSIONAL',
     plans: [
       {
         name: 'STARTER',
@@ -76,6 +75,14 @@ const planData: Record<'marketing' | 'utility' | 'authentication', PlanGroup> = 
         features: starterFeatures,
       },
       {
+        name: 'HYPERGROWTH',
+        price: '90,000',
+        limit: '1,00,000 WhatsApp messages',
+        description: 'Full-scale automated customer support and custom AI chatbots.',
+        icon: 'platinum',
+        features: platinumFeatures,
+      },
+      {
         name: 'PROFESSIONAL',
         price: '48,000',
         limit: '50,000 WhatsApp Messages',
@@ -83,18 +90,9 @@ const planData: Record<'marketing' | 'utility' | 'authentication', PlanGroup> = 
         icon: 'professional',
         features: professionalFeatures,
       },
-      {
-        name: 'PLATINUM',
-        price: '90,000',
-        limit: '1,00,000 WhatsApp messages',
-        description: 'Full-scale automated customer support and custom AI chatbots.',
-        icon: 'platinum',
-        features: platinumFeatures,
-      },
     ],
   },
   utility: {
-    highlighted: 'PLATINUM',
     plans: [
       {
         name: 'STARTER',
@@ -105,25 +103,24 @@ const planData: Record<'marketing' | 'utility' | 'authentication', PlanGroup> = 
         features: starterFeatures,
       },
       {
+        name: 'HYPERGROWTH',
+        price: '18,000',
+        limit: '1,00,000 WhatsApp messages',
+        description: 'Full-scale automated customer support and custom AI chatbots.',
+        icon: 'platinum',
+        features: platinumFeatures,
+      },
+      {
         name: 'PROFESSIONAL',
         price: '10,000',
         limit: '50,000 WhatsApp Messages',
         description: 'Scale customer engagement with smart automation and flows.',
         icon: 'professional',
         features: professionalFeatures,
-      },
-      {
-        name: 'PLATINUM',
-        price: '18,000',
-        limit: '1,00,000 WhatsApp messages',
-        description: 'Full-scale automated customer support and custom AI chatbots.',
-        icon: 'platinum',
-        features: platinumFeatures,
       },
     ],
   },
   authentication: {
-    highlighted: 'PLATINUM',
     plans: [
       {
         name: 'STARTER',
@@ -134,28 +131,28 @@ const planData: Record<'marketing' | 'utility' | 'authentication', PlanGroup> = 
         features: starterFeatures,
       },
       {
+        name: 'HYPERGROWTH',
+        price: '18,000',
+        limit: '1,00,000 WhatsApp messages',
+        description: 'Full-scale automated customer support and custom AI chatbots.',
+        icon: 'platinum',
+        features: platinumFeatures,
+      },
+      {
         name: 'PROFESSIONAL',
         price: '10,000',
         limit: '50,000 WhatsApp Messages',
         description: 'Scale customer engagement with smart automation and flows.',
         icon: 'professional',
         features: professionalFeatures,
-      },
-      {
-        name: 'PLATINUM',
-        price: '18,000',
-        limit: '1,00,000 WhatsApp messages',
-        description: 'Full-scale automated customer support and custom AI chatbots.',
-        icon: 'platinum',
-        features: platinumFeatures,
       },
     ],
   },
 };
 
 // Starter Icon: Target Reticle
-const StarterIcon = ({ theme, active }: { theme: 'light' | 'dark'; active: boolean }) => {
-  const iconColor = theme === 'dark' ? 'text-[#25d366]' : active ? 'text-white' : 'text-gray-700 group-hover:text-white transition-colors duration-300';
+const StarterIcon = ({ theme }: { theme: 'light' | 'dark' }) => {
+  const iconColor = theme === 'dark' ? 'text-slate-400 group-hover:text-wa transition-colors duration-300' : 'text-gray-700 group-hover:text-white transition-colors duration-300';
   return (
     <div className="relative flex items-center justify-center w-12 h-12 mx-auto transition-transform duration-300 group-hover:scale-110">
       <span className={`absolute top-0 left-1 w-1 h-1 rounded-full ${theme === 'dark' ? 'bg-[#25d366]/40' : 'bg-black/10'}`} />
@@ -169,8 +166,8 @@ const StarterIcon = ({ theme, active }: { theme: 'light' | 'dark'; active: boole
 };
 
 // Professional Icon: Lifebuoy
-const ProfessionalIcon = ({ theme, active }: { theme: 'light' | 'dark'; active: boolean }) => {
-  const iconColor = theme === 'dark' ? 'text-[#25d366]' : active ? 'text-white' : 'text-gray-700 group-hover:text-white transition-colors duration-300';
+const ProfessionalIcon = ({ theme }: { theme: 'light' | 'dark' }) => {
+  const iconColor = theme === 'dark' ? 'text-slate-400 group-hover:text-wa transition-colors duration-300' : 'text-gray-700 group-hover:text-white transition-colors duration-300';
   return (
     <div className="relative flex items-center justify-center w-12 h-12 mx-auto transition-transform duration-300 group-hover:scale-110">
       <span className={`absolute top-0 left-1 w-1.5 h-1.5 rounded-full ${theme === 'dark' ? 'bg-[#22d3ee]/40' : 'bg-black/10'}`} />
@@ -184,8 +181,8 @@ const ProfessionalIcon = ({ theme, active }: { theme: 'light' | 'dark'; active: 
 };
 
 // Platinum Icon: Settings Gear
-const PlatinumIcon = ({ theme, active }: { theme: 'light' | 'dark'; active: boolean }) => {
-  const iconColor = theme === 'dark' ? 'text-[#25d366]' : active ? 'text-white' : 'text-gray-700 group-hover:text-white transition-colors duration-300';
+const PlatinumIcon = ({ theme }: { theme: 'light' | 'dark' }) => {
+  const iconColor = theme === 'dark' ? 'text-slate-400 group-hover:text-wa transition-colors duration-300' : 'text-gray-700 group-hover:text-white transition-colors duration-300';
   return (
     <div className="relative flex items-center justify-center w-12 h-12 mx-auto transition-transform duration-300 group-hover:scale-110">
       <span className={`absolute top-1 right-1 w-1 h-1 rounded-full ${theme === 'dark' ? 'bg-[#25d366]' : 'bg-black'}`} />
@@ -251,28 +248,15 @@ export function PricingSection() {
         {/* Pricing Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch mt-6">
           {currentGroup.plans.map((plan) => {
-            const isHighlighted = plan.name === currentGroup.highlighted;
-            
-            // Premium Card Styles
-            const cardClasses = isHighlighted
-              ? 'group relative flex flex-col justify-between rounded-3xl border-2 border-wa/40 bg-gradient-to-b from-[#0F2617]/90 to-[#0A111F]/90 text-slate-200 shadow-[0_0_50px_-5px_rgba(37,211,102,0.2)] hover:shadow-[0_0_60px_-5px_rgba(37,211,102,0.3)] hover:border-wa/60 hover:-translate-y-2 p-8 transition-all duration-500 h-full backdrop-blur-xl'
-              : 'group relative flex flex-col justify-between rounded-3xl border border-white/[0.08] bg-[#0b0f19]/80 text-slate-200 shadow-xl hover:shadow-[0_0_40px_rgba(37,211,102,0.1)] hover:border-wa/30 hover:-translate-y-2 p-8 transition-all duration-500 h-full backdrop-blur-xl';
+            // Interactive Card Styles on hover only
+            const cardClasses = 'group relative flex flex-col justify-between rounded-3xl border border-white/[0.08] hover:border-wa/40 bg-[#0b0f19]/80 hover:bg-gradient-to-b hover:from-[#0F2617]/90 hover:to-[#0A111F]/90 text-slate-200 shadow-xl hover:shadow-[0_0_50px_-5px_rgba(37,211,102,0.25)] hover:-translate-y-2 p-8 transition-all duration-500 h-full backdrop-blur-xl';
 
-            const titleClasses = isHighlighted
-              ? 'text-center font-display text-sm font-bold tracking-widest uppercase mb-4 text-wa transition-colors duration-300'
-              : 'text-center font-display text-sm font-bold tracking-widest uppercase mb-4 text-slate-400 group-hover:text-wa transition-colors duration-300';
+            const titleClasses = 'text-center font-display text-sm font-bold tracking-widest uppercase mb-4 text-slate-400 group-hover:text-wa transition-colors duration-300';
 
-            const buttonClasses = isHighlighted
-              ? 'w-full py-3.5 text-center text-xs font-black uppercase tracking-wider rounded-full bg-wa text-canvas shadow-[0_0_24px_-4px_rgb(37_211_102/0.6)] hover:shadow-[0_0_30px_rgb(37_211_102/0.8)] hover:scale-[1.02] transition-all duration-300 cursor-pointer'
-              : 'w-full py-3.5 text-center text-xs font-bold uppercase tracking-wider rounded-full border border-white/10 text-white bg-white/5 hover:bg-wa hover:text-canvas hover:border-wa hover:shadow-[0_0_24px_-4px_rgb(37_211_102/0.5)] hover:scale-[1.02] transition-all duration-300 cursor-pointer';
+            const buttonClasses = 'w-full py-3.5 text-center text-xs font-bold uppercase tracking-wider rounded-full border border-white/10 text-white bg-white/5 group-hover:bg-wa group-hover:text-canvas group-hover:border-wa group-hover:shadow-[0_0_24px_-4px_rgb(37_211_102/0.5)] group-hover:scale-[1.02] transition-all duration-300 cursor-pointer';
 
             return (
               <div key={plan.name} className={cardClasses}>
-                {isHighlighted && (
-                  <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-wa to-emerald-500 text-canvas text-[10px] font-black tracking-widest uppercase py-1 px-4 rounded-full shadow-[0_0_20px_rgb(37_211_102/0.5)] z-20">
-                    Most Popular
-                  </span>
-                )}
                 
                 {/* Header Info */}
                 <div className="flex flex-col items-center">
@@ -284,9 +268,9 @@ export function PricingSection() {
                   <div className="flex justify-center mb-6 relative">
                     <div className="absolute inset-0 bg-wa/5 rounded-full blur-xl w-16 h-16 mx-auto" />
                     <div className="relative z-10 w-16 h-16 rounded-2xl bg-white/[0.03] border border-white/5 flex items-center justify-center group-hover:border-wa/20 group-hover:bg-wa/5 transition-all duration-300">
-                      {plan.icon === 'starter' && <StarterIcon theme="dark" active={isHighlighted} />}
-                      {plan.icon === 'professional' && <ProfessionalIcon theme="dark" active={isHighlighted} />}
-                      {plan.icon === 'platinum' && <PlatinumIcon theme="dark" active={isHighlighted} />}
+                      {plan.icon === 'starter' && <StarterIcon theme="dark" />}
+                      {plan.icon === 'professional' && <ProfessionalIcon theme="dark" />}
+                      {plan.icon === 'platinum' && <PlatinumIcon theme="dark" />}
                     </div>
                   </div>
 
