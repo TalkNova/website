@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useScroll, useMotionValueEvent } from 'framer-motion';
-import { Menu, X, Sun, Moon } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
 import { cn } from '@/lib/cn';
 import { useTheme } from '@/context/ThemeContext';
@@ -25,7 +25,7 @@ type LandingNavbarProps = {
 export function LandingNavbar({ scrolledInitially = false }: LandingNavbarProps) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(scrolledInitially);
-  const { theme, toggleTheme } = useTheme();
+  const { theme } = useTheme();
   const { scrollY } = useScroll();
 
   useMotionValueEvent(scrollY, 'change', (y) => {
@@ -79,20 +79,6 @@ export function LandingNavbar({ scrolledInitially = false }: LandingNavbarProps)
         </nav>
 
         <div className="hidden items-center gap-3 md:flex">
-          {/* Small theme toggle button next to action items */}
-          <button
-            onClick={toggleTheme}
-            className={cn(
-              "p-2 rounded-full border transition-all duration-300 mr-2",
-              theme === 'dark'
-                ? "text-slate-300 border-white/10 bg-white/5 hover:bg-white/10 hover:text-white"
-                : "text-gray-600 border-black/10 bg-black/5 hover:bg-black/10 hover:text-black"
-            )}
-            aria-label="Toggle theme"
-          >
-            {theme === 'dark' ? <Sun className="h-4 w-4 text-amber-400" /> : <Moon className="h-4 w-4" />}
-          </button>
-
           <Link
             href="/login"
             className={cn(
@@ -138,22 +124,6 @@ export function LandingNavbar({ scrolledInitially = false }: LandingNavbarProps)
         )}
       >
         <div className="flex flex-col gap-1 px-4 py-4">
-          <button
-            onClick={() => {
-              toggleTheme();
-              setOpen(false);
-            }}
-            className={cn(
-              "flex items-center justify-between rounded-lg px-3 py-3 text-sm font-semibold mb-2 border transition",
-              theme === 'dark'
-                ? "text-slate-200 border-white/10 bg-white/5"
-                : "text-gray-800 border-black/10 bg-black/5"
-            )}
-          >
-            <span>Switch Mode</span>
-            {theme === 'dark' ? <Sun className="h-4.5 w-4.5 text-amber-400" /> : <Moon className="h-4.5 w-4.5" />}
-          </button>
-
           {nav.map((item) => (
             <Link
               key={item.href}
