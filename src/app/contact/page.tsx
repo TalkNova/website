@@ -4,8 +4,8 @@ import { ContactForm } from '@/components/contact/ContactForm';
 import { Mail, MessageCircle } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Contact Us',
-  description: 'Get in touch with the Thatmatters team.',
+  title: 'Book a Demo',
+  description: 'Schedule a tailored walkthrough with the Thatmatters team.',
 };
 
 export default function ContactPage() {
@@ -15,11 +15,11 @@ export default function ContactPage() {
         <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-2">
           <div>
             <h1 className="font-display text-4xl font-bold text-white sm:text-5xl">
-              Get in <span className="text-gradient-wa">touch</span>
+              Book a <span className="text-gradient-wa">demo</span>
             </h1>
             <p className="mt-4 text-slate-400">
-              Have a question about our pricing, features, or anything else? Our team is ready to
-              answer all your questions.
+              Share your details and we&apos;ll schedule a tailored walkthrough — automations,
+              integrations, and launch milestones aligned to your goals.
             </p>
             <div className="mt-10 space-y-6">
               <div className="flex items-center gap-4">

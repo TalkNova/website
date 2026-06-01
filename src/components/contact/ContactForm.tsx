@@ -9,28 +9,54 @@ const field =
 
 export function ContactForm() {
   const [status, setStatus] = useState<Status>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
 
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (status === 'submitting') return;
-    setStatus('submitting');
+
     const form = e.currentTarget;
-    window.setTimeout(() => {
-      form.reset();
-      setStatus('success');
-      window.setTimeout(() => setStatus('idle'), 4000);
-    }, 600);
+    const data = new FormData(form);
+    const fullName = String(data.get('fullName') ?? '').trim();
+    const email = String(data.get('email') ?? '').trim();
+    const phone = String(data.get('phone') ?? '').trim();
+    const message = String(data.get('message') ?? '').trim();
+
+    setStatus('submitting');
+    setErrorMessage('');
+
+    try {
+      const res = await fetch('/api/lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ fullName, email, phone, message }),
+      });
+      const json = (await res.json()) as { message?: string };
+
+      if (res.ok) {
+        form.reset();
+        setStatus('success');
+        window.setTimeout(() => setStatus('idle'), 4000);
+        return;
+      }
+
+      setStatus('error');
+      setErrorMessage(json.message ?? 'Something went wrong. Try again.');
+    } catch {
+      setStatus('error');
+      setErrorMessage('Something went wrong. Try again.');
+    }
   };
 
   return (
     <form onSubmit={onSubmit} className="space-y-4">
       <div>
-        <label htmlFor="name" className="mb-1 block text-sm text-slate-400">
+        <label htmlFor="fullName" className="mb-1 block text-sm text-slate-400">
           Full name
         </label>
         <input
-          id="name"
-          name="name"
+          id="fullName"
+          name="fullName"
           type="text"
           className={field}
           placeholder="John Doe"
@@ -55,6 +81,21 @@ export function ContactForm() {
         />
       </div>
       <div>
+        <label htmlFor="phone" className="mb-1 block text-sm text-slate-400">
+          Phone
+        </label>
+        <input
+          id="phone"
+          name="phone"
+          type="tel"
+          className={field}
+          placeholder="+91 98765 43210"
+          required
+          disabled={status === 'submitting'}
+          autoComplete="tel"
+        />
+      </div>
+      <div>
         <label htmlFor="message" className="mb-1 block text-sm text-slate-400">
           Message
         </label>
@@ -63,7 +104,7 @@ export function ContactForm() {
           name="message"
           className={`${field} min-h-[120px] resize-y`}
           rows={5}
-          placeholder="How can we help you?"
+          placeholder="Tell us about your use case or questions about WhatsApp API pricing."
           required
           disabled={status === 'submitting'}
         />
@@ -71,13 +112,15 @@ export function ContactForm() {
       {status === 'success' ? (
         <p className="text-sm text-wa">Thanks — we&apos;ll get back to you soon.</p>
       ) : null}
-      {status === 'error' ? <p className="text-sm text-red-400">Something went wrong. Try again.</p> : null}
+      {status === 'error' ? (
+        <p className="text-sm text-red-400">{errorMessage}</p>
+      ) : null}
       <button
         type="submit"
         className="w-full rounded-full bg-wa py-3 font-semibold text-canvas transition hover:bg-wa-dim disabled:opacity-60"
         disabled={status === 'submitting'}
       >
-        {status === 'submitting' ? 'Sending…' : 'Send message'}
+        {status === 'submitting' ? 'Sending…' : 'Book demo'}
       </button>
     </form>
   );

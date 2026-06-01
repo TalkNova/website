@@ -6,6 +6,7 @@ import type {
   BlogPagination,
   NewsletterSubscribeResult,
 } from '@/types/blog';
+import type { LeadSubmitInput, LeadSubmitResult } from '@/types/lead';
 
 const DEFAULT_BASE = 'http://localhost:8001';
 
@@ -227,6 +228,17 @@ export async function subscribeNewsletter(
     {
       method: 'POST',
       body: JSON.stringify({ email, source }),
+    },
+    { cache: 'no-store', revalidate: false },
+  );
+}
+
+export async function submitLead(input: LeadSubmitInput): Promise<LeadSubmitResult> {
+  return blogRequest<LeadSubmitResult>(
+    '/auth/lead',
+    {
+      method: 'POST',
+      body: JSON.stringify(input),
     },
     { cache: 'no-store', revalidate: false },
   );
