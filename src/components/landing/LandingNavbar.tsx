@@ -6,6 +6,7 @@ import { useScroll, useMotionValueEvent } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
 import { cn } from '@/lib/cn';
+import { APP_URL } from '@/lib/site';
 import { useTheme } from '@/context/ThemeContext';
 
 const nav = [
@@ -80,7 +81,7 @@ export function LandingNavbar({ scrolledInitially = false }: LandingNavbarProps)
 
         <div className="hidden items-center gap-3 md:flex">
           <Link
-            href="/login"
+            href={APP_URL}
             className={cn(
               "rounded-full px-4 py-2 text-sm font-medium transition",
               theme === 'dark'

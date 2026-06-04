@@ -5,6 +5,7 @@ import { MessageCircle } from 'lucide-react';
 import { IconLinkedIn, IconX } from '@/components/icons/BrandIcons';
 import { useTheme } from '@/context/ThemeContext';
 import { cn } from '@/lib/cn';
+import { APP_URL } from '@/lib/site';
 
 const footerLinks = {
   product: [
@@ -15,7 +16,7 @@ const footerLinks = {
   company: [
     { href: '/about', label: 'About' },
     { href: '/contact', label: 'Contact' },
-    { href: '/login', label: 'Login' },
+    { href: APP_URL, label: 'Login' },
   ],
 };
 

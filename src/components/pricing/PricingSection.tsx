@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { Check } from 'lucide-react';
 import { useTheme } from '@/context/ThemeContext';
+import { APP_URL } from '@/lib/site';
 
 type PlanName = 'STARTER' | 'PROFESSIONAL' | 'HYPERGROWTH';
 
@@ -330,7 +331,9 @@ export function PricingSection() {
                 {/* CTA Button placed above Features */}
                 <div className="w-full mb-6">
                   <button
-                    onClick={() => window.location.href = '/login'}
+                    onClick={() => {
+                      window.location.href = APP_URL;
+                    }}
                     className={buttonClasses}
                   >
                     CHOOSE PLAN

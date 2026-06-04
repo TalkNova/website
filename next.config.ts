@@ -10,6 +10,7 @@ const nextConfig: NextConfig = {
         destination: '/terms-and-conditions',
         permanent: true,
       },
+      { source: '/login', destination: 'https://app.thatmatters.in/', permanent: false },
     ];
   },
   images: {
