@@ -42,6 +42,9 @@ export const metadata: Metadata = {
     description:
       'Automate conversations, campaigns, and lead capture on WhatsApp with AI — built for teams that ship.',
   },
+  other: {
+    'facebook-domain-verification': 'jdlatdpvllwi1m8gmf2l4q7hth2cnt',
+  },
 };
 
 export default function RootLayout({
