@@ -7,7 +7,7 @@ const nextConfig: NextConfig = {
       beforeFiles: [
         {
           source: '/google5a2c0500c9d9d78d.html',
-          destination: '/google-site-verification',
+          destination: '/google-site-verification'
         },
       ],
     };
