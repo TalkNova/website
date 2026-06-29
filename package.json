@@ -10,7 +10,8 @@
     "lint": "next lint",
     "legal:extract": "node scripts/legal-extract.mjs",
     "blog:snapshot": "node scripts/blog-snapshot.mjs",
-    "prebuild": "node scripts/blog-snapshot.mjs || true"
+    "prebuild": "node scripts/blog-snapshot.mjs || true",
+    "verify:canonical": "node scripts/verify-canonical.mjs"
   },
   "dependencies": {
     "@tailwindcss/postcss": "^4.3.0",

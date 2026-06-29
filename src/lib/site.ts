@@ -4,8 +4,20 @@ export const APP_URL = 'https://app.thatmatters.in/';
 /** Production marketing site origin (canonical URLs, sitemap, Open Graph). */
 export const SITE_ORIGIN = 'https://thatmatters.in';
 
-export function getSiteUrl(): URL {
-  const fromEnv = process.env.NEXT_PUBLIC_SITE_URL;
+function isLocalDev(): boolean {
+  return (
+    process.env.NODE_ENV === 'development' &&
+    !process.env.VERCEL &&
+    !process.env.VERCEL_ENV
+  );
+}
+
+/**
+ * Base URL for SEO: canonical links, metadataBase, sitemap, robots.
+ * Never uses VERCEL_URL — preview deployment hostnames must not appear in canonicals.
+ */
+export function getCanonicalBaseUrl(): URL {
+  const fromEnv = process.env.NEXT_PUBLIC_SITE_URL?.trim();
   if (fromEnv) {
     try {
       return new URL(fromEnv);
@@ -13,28 +25,30 @@ export function getSiteUrl(): URL {
       /* fall through */
     }
   }
-  if (process.env.VERCEL_URL) {
-    return new URL(`https://${process.env.VERCEL_URL}`);
+
+  if (isLocalDev()) {
+    return new URL('http://localhost:3000');
   }
-  if (process.env.NODE_ENV === 'production') {
-    return new URL(SITE_ORIGIN);
-  }
-  return new URL('http://localhost:3000');
+
+  return new URL(SITE_ORIGIN);
 }
 
-/** Relative path for Next.js metadata alternates.canonical (resolved via metadataBase). */
-export function canonicalFor(path = '/'): { alternates: { canonical: string } } {
-  if (path === '/') {
-    return { alternates: { canonical: '/' } };
-  }
-  const normalized = `/${path.replace(/^\/+|\/+$/g, '')}`;
-  return { alternates: { canonical: normalized } };
+/** @deprecated Use getCanonicalBaseUrl for metadata; kept for non-SEO share/runtime use. */
+export function getSiteUrl(): URL {
+  return getCanonicalBaseUrl();
 }
 
+/** Absolute canonical URL for a path on the marketing domain. */
 export function absoluteCanonical(path = '/'): string {
-  const base = getSiteUrl().origin;
-  if (path === '/') {
+  const base = getCanonicalBaseUrl().origin;
+  if (path === '/' || path === '') {
     return `${base}/`;
   }
-  return `${base}/${path.replace(/^\/+|\/+$/g, '')}`;
+  const normalized = path.replace(/^\/+|\/+$/g, '');
+  return `${base}/${normalized}`;
+}
+
+/** Next.js metadata alternates.canonical — always an absolute production URL. */
+export function canonicalFor(path = '/'): { alternates: { canonical: string } } {
+  return { alternates: { canonical: absoluteCanonical(path) } };
 }

@@ -1,5 +1,5 @@
 import type { MetadataRoute } from 'next';
-import { getSiteUrl } from '@/lib/site';
+import { getCanonicalBaseUrl } from '@/lib/site';
 import { getAllSlugs } from '@/lib/posts';
 
 const STATIC_ROUTES = [
@@ -13,7 +13,7 @@ const STATIC_ROUTES = [
 ] as const;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const base = getSiteUrl().origin;
+  const base = getCanonicalBaseUrl().origin;
   const slugs = await getAllSlugs();
 
   const staticEntries: MetadataRoute.Sitemap = STATIC_ROUTES.map((path) => ({

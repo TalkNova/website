@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
 import { Inter, Outfit } from 'next/font/google';
-import { getSiteUrl } from '@/lib/site';
+import { getCanonicalBaseUrl } from '@/lib/site';
 import { ThemeProvider } from '@/context/ThemeContext';
 import { GoogleTag } from '@/components/analytics/GoogleTag';
 import { CookieYes } from '@/components/consent/CookieYes';
@@ -20,7 +20,7 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  metadataBase: getSiteUrl(),
+  metadataBase: getCanonicalBaseUrl(),
   title: {
     default: 'Thatmatters — AI WhatsApp Automation for Business',
     template: '%s | Thatmatters',
