@@ -2,6 +2,16 @@ import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+  async rewrites() {
+    return {
+      beforeFiles: [
+        {
+          source: '/google5a2c0500c9d9d78d.html',
+          destination: '/google-site-verification',
+        },
+      ],
+    };
+  },
   async redirects() {
     return [
       { source: '/privacy-policy.html', destination: '/privacy-policy', permanent: true },

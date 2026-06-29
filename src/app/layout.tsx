@@ -4,6 +4,7 @@ import { Inter, Outfit } from 'next/font/google';
 import { getSiteUrl } from '@/lib/site';
 import { ThemeProvider } from '@/context/ThemeContext';
 import { GoogleTag } from '@/components/analytics/GoogleTag';
+import { CookieYes } from '@/components/consent/CookieYes';
 import './globals.css';
 
 const inter = Inter({
@@ -63,6 +64,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body suppressHydrationWarning>
+        <CookieYes />
         <GoogleTag />
         <ThemeProvider>
           {children}
