@@ -22,19 +22,35 @@ const outfit = Outfit({
 export const metadata: Metadata = {
   metadataBase: getCanonicalBaseUrl(),
   title: {
-    default: 'Thatmatters — AI WhatsApp Automation for Business',
+    default:
+      'Thatmatters | WhatsApp Business API & AI Customer Communication Platform',
     template: '%s | Thatmatters',
   },
   description:
-    'AI-powered WhatsApp Business automation, custom chatbots, verified templates, campaigns, and lead generation — with full setup and 24/7 support.',
+    'Thatmatters helps businesses automate WhatsApp with the official Business API, AI chatbots, verified templates, campaigns, and 24/7 lead capture — setup and support included.',
   keywords: [
     'WhatsApp Business API',
+    'WhatsApp Business API India',
     'WhatsApp automation',
-    'AI chatbot',
-    'marketing campaigns',
-    'lead generation',
+    'WhatsApp chatbot',
+    'AI customer communication',
+    'WhatsApp API pricing',
+    'WhatsApp template approval',
+    'Meta Business Verification',
+    'lead generation WhatsApp',
     'Thatmatters',
   ],
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+      'max-video-preview': -1,
+    },
+  },
   icons: { icon: '/favicon.png' },
   verification: {
     google: 'google5a2c0500c9d9d78d',
@@ -43,9 +59,10 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     siteName: 'Thatmatters',
-    title: 'Thatmatters — AI WhatsApp Automation for Business',
+    title:
+      'Thatmatters | WhatsApp Business API & AI Customer Communication Platform',
     description:
-      'Automate conversations, campaigns, and lead capture on WhatsApp with AI — built for teams that ship.',
+      'Automate WhatsApp conversations, campaigns, and lead capture with AI — official API, verified templates, and full launch support.',
   },
   other: {
     'facebook-domain-verification': 'jdlatdpvllwi1m8gmf2l4q7hth2cnt',
