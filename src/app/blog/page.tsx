@@ -8,7 +8,7 @@ import {
   getPopularPosts,
 } from '@/lib/posts';
 import { getBlogListingMeta } from '@/lib/posts';
-import { getSiteUrl } from '@/lib/site';
+import { canonicalFor, getSiteUrl } from '@/lib/site';
 import { blogListingJsonLd } from '@/lib/blog-jsonld';
 
 export const revalidate = 60;
@@ -30,14 +30,14 @@ export async function generateMetadata(): Promise<Metadata> {
         title: meta.metaTitle,
         description: meta.metaDescription,
       },
-      alternates: { canonical: '/blog' },
+      ...canonicalFor('/blog'),
     };
   } catch {
     return {
       title: 'Blog — AI Automation & WhatsApp Growth Insights',
       description:
         'Learn AI automation, WhatsApp marketing, chatbot systems, and customer engagement strategies from the Thatmatters team.',
-      alternates: { canonical: '/blog' },
+      ...canonicalFor('/blog'),
     };
   }
 }

@@ -1,10 +1,12 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import { PageShell } from '@/components/layout/PageShell';
+import { canonicalFor } from '@/lib/site';
 
 export const metadata: Metadata = {
   title: 'About Us',
   description: 'Learn about our mission to revolutionize WhatsApp communication.',
+  ...canonicalFor('/about'),
 };
 
 export default function AboutPage() {

@@ -2,10 +2,12 @@ import type { Metadata } from 'next';
 import { PageShell } from '@/components/layout/PageShell';
 import { ContactForm } from '@/components/contact/ContactForm';
 import { Mail, MessageCircle } from 'lucide-react';
+import { canonicalFor } from '@/lib/site';
 
 export const metadata: Metadata = {
   title: 'Book a Demo',
   description: 'Schedule a tailored walkthrough with the Thatmatters team.',
+  ...canonicalFor('/contact'),
 };
 
 export default function ContactPage() {

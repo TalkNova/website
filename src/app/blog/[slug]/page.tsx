@@ -4,7 +4,7 @@ import { PageShell } from '@/components/layout/PageShell';
 import { BlogPostLayout } from '@/components/blog/post/BlogPostLayout';
 import { getAllSlugs, getPostBySlug, getRelatedPosts } from '@/lib/posts';
 import { markdownBlocksToHtml, extractHeadingsFromContent } from '@/lib/markdown';
-import { getSiteUrl } from '@/lib/site';
+import { getSiteUrl, canonicalFor } from '@/lib/site';
 import { blogPostJsonLd } from '@/lib/blog-jsonld';
 import { getBlogPostSeo } from '@/lib/blog-metadata';
 
@@ -29,21 +29,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return { title: 'Not found' };
   }
 
-  const canonical = new URL(`/blog/${post.slug}`, getSiteUrl());
   const seo = getBlogPostSeo(post);
+  const postUrl = new URL(`/blog/${post.slug}`, getSiteUrl()).toString();
 
   return {
     title: seo.metaTitle,
     description: seo.metaDescription,
     keywords: post.tags,
-    alternates: { canonical: canonical.toString() },
+    ...canonicalFor(`/blog/${post.slug}`),
     openGraph: {
       title: seo.ogTitle,
       description: seo.ogDescription,
       type: 'article',
       publishedTime: post.publishedAt,
       modifiedTime: post.updatedAt,
-      url: canonical.toString(),
+      url: postUrl,
       images: post.coverImage ? [{ url: post.coverImage, alt: post.title }] : undefined,
       authors: [post.author.name],
       tags: post.tags,
