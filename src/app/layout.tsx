@@ -3,6 +3,7 @@ import type { ReactNode } from 'react';
 import { Inter, Outfit } from 'next/font/google';
 import { getSiteUrl } from '@/lib/site';
 import { ThemeProvider } from '@/context/ThemeContext';
+import { GoogleTag } from '@/components/analytics/GoogleTag';
 import './globals.css';
 
 const inter = Inter({
@@ -34,6 +35,9 @@ export const metadata: Metadata = {
     'Thatmatters',
   ],
   icons: { icon: '/favicon.png' },
+  verification: {
+    google: 'google5a2c0500c9d9d78d',
+  },
   openGraph: {
     type: 'website',
     locale: 'en_US',
@@ -59,6 +63,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body suppressHydrationWarning>
+        <GoogleTag />
         <ThemeProvider>
           {children}
         </ThemeProvider>
