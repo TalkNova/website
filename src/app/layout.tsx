@@ -51,7 +51,13 @@ export const metadata: Metadata = {
       'max-video-preview': -1,
     },
   },
-  icons: { icon: '/favicon.png' },
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/favicon.png' },
+    ],
+    apple: '/apple-touch-icon.png',
+  },
   verification: {
     google: 'google5a2c0500c9d9d78d',
   },
