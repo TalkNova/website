@@ -9,7 +9,7 @@ export function CookieYes() {
     <Script
       id="cookieyes"
       src={COOKIEYES_SCRIPT_URL}
-      strategy="beforeInteractive"
+      strategy="afterInteractive"
     />
   );
 }
