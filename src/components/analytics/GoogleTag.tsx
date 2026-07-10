@@ -1,6 +1,6 @@
 import Script from 'next/script';
 
-const GA_ID = process.env.NEXT_PUBLIC_GA_ID ?? 'G-ZS144VNKBB';
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID ?? 'G-Z94XBRNPYL';
 
 export function GoogleTag() {
   return (
