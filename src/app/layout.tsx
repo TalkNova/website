@@ -88,11 +88,11 @@ export default function RootLayout({
     >
       <body suppressHydrationWarning>
         <CookieYes />
-        <GoogleTag />
         <ThemeProvider>
           {children}
         </ThemeProvider>
       </body>
+      <GoogleTag />
     </html>
   );
 }
