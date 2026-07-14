@@ -30,7 +30,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <p className="font-medium text-white">Email us</p>
-                  <p className="text-sm text-slate-400">support@thatmatters.com</p>
+                  <p className="text-sm text-slate-400">support@thatmatters.in</p>
                 </div>
               </div>
               <div className="flex items-center gap-4">
