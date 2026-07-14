@@ -9,6 +9,13 @@ export type BlogAuthor = {
   avatar: string;
 };
 
+/** Canonical blog cover image size used across cards, hero, and OG. */
+export const BLOG_COVER_WIDTH = 1024;
+export const BLOG_COVER_HEIGHT = 721;
+
+/** Tailwind-friendly aspect ratio matching BLOG_COVER_WIDTH / BLOG_COVER_HEIGHT. */
+export const BLOG_COVER_ASPECT_CLASS = 'aspect-[1024/721]' as const;
+
 /** Summary + full article shape returned by public blog API. */
 export type BlogPost = {
   title: string;

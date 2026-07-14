@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Clock } from 'lucide-react';
 import type { BlogPost } from '@/types/blog';
+import { BLOG_COVER_ASPECT_CLASS } from '@/types/blog';
 import { formatPostDate } from '@/lib/format-post-date';
 
 type BlogCardProps = {
@@ -24,7 +25,7 @@ export function BlogCard({ post, index }: BlogCardProps) {
       whileHover={{ y: -6 }}
       className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-white/[0.08] blog-glass transition-shadow duration-300 hover:border-violet-500/30 hover:shadow-[0_0_48px_-12px_rgb(139_92_246/0.35)]"
     >
-      <Link href={href} className="relative block aspect-[16/10] overflow-hidden">
+      <Link href={href} className={`relative block ${BLOG_COVER_ASPECT_CLASS} overflow-hidden`}>
         <Image
           src={post.coverImage}
           alt=""

@@ -1,4 +1,10 @@
 import type { BlogContentBlock } from '@/types/blog';
+import {
+  isFlowFenceLanguage,
+  looksLikeEscalationFlow,
+  parseFlowDiagramData,
+  renderAutomationFlowDiagram,
+} from '@/lib/blog-flow-diagram';
 
 export type TocHeading = { id: string; text: string; level: 2 | 3 };
 
@@ -133,6 +139,10 @@ function isTableSeparatorRow(cells: string[]): boolean {
 }
 
 function renderCodeBlock(code: string, language: string): string {
+  if (isFlowFenceLanguage(language) || looksLikeEscalationFlow(code)) {
+    return renderAutomationFlowDiagram(parseFlowDiagramData(code));
+  }
+
   const lang = escapeHtml(language || 'text');
   return `<div class="blog-code-block my-8 max-w-full overflow-x-auto rounded-xl border border-white/10 bg-[#0d1117]"><pre class="m-0 max-w-full p-4 font-mono text-[0.875rem] leading-relaxed"><code class="block whitespace-pre-wrap break-all text-slate-300 sm:whitespace-pre language-${lang}">${escapeHtml(code)}</code></pre></div>`;
 }

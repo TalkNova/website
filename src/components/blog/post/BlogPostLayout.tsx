@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Clock } from 'lucide-react';
 import type { BlogPost } from '@/types/blog';
+import { BLOG_COVER_ASPECT_CLASS } from '@/types/blog';
 import type { TocHeading } from '@/lib/markdown';
 import { formatPostDate } from '@/lib/format-post-date';
 import { ReadingProgress } from '@/components/blog/post/ReadingProgress';
@@ -89,7 +90,7 @@ export function BlogPostLayout({ post, html, headings, related, shareUrl }: Blog
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.15, duration: 0.55 }}
-              className="relative mt-10 aspect-[21/9] max-w-5xl overflow-hidden rounded-3xl border border-white/[0.08] shadow-card"
+              className={`relative mt-10 ${BLOG_COVER_ASPECT_CLASS} max-w-5xl overflow-hidden rounded-3xl border border-white/[0.08] shadow-card`}
             >
               <Image
                 src={post.coverImage}

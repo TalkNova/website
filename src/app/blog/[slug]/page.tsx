@@ -7,6 +7,7 @@ import { markdownBlocksToHtml, extractHeadingsFromContent } from '@/lib/markdown
 import { getSiteUrl, canonicalFor } from '@/lib/site';
 import { blogPostJsonLd } from '@/lib/blog-jsonld';
 import { getBlogPostSeo } from '@/lib/blog-metadata';
+import { BLOG_COVER_HEIGHT, BLOG_COVER_WIDTH } from '@/types/blog';
 
 export const revalidate = 60;
 export const dynamicParams = true;
@@ -44,7 +45,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       publishedTime: post.publishedAt,
       modifiedTime: post.updatedAt,
       url: postUrl,
-      images: post.coverImage ? [{ url: post.coverImage, alt: post.title }] : undefined,
+      images: post.coverImage
+        ? [
+            {
+              url: post.coverImage,
+              alt: post.title,
+              width: BLOG_COVER_WIDTH,
+              height: BLOG_COVER_HEIGHT,
+            },
+          ]
+        : undefined,
       authors: [post.author.name],
       tags: post.tags,
     },

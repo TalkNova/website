@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import type { BlogPost } from '@/types/blog';
+import { BLOG_COVER_ASPECT_CLASS } from '@/types/blog';
 import { formatPostDate } from '@/lib/format-post-date';
 
 type RelatedPostsProps = {
@@ -21,7 +22,7 @@ export function RelatedPosts({ posts }: RelatedPostsProps) {
             key={post.slug}
             className="group overflow-hidden rounded-2xl border border-white/[0.08] blog-glass transition hover:border-violet-500/30"
           >
-            <Link href={`/blog/${post.slug}`} className="relative block aspect-[16/10]">
+            <Link href={`/blog/${post.slug}`} className={`relative block ${BLOG_COVER_ASPECT_CLASS}`}>
               <Image
                 src={post.coverImage}
                 alt=""

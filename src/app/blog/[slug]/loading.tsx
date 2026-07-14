@@ -1,4 +1,5 @@
 import { PageShell } from '@/components/layout/PageShell';
+import { BLOG_COVER_ASPECT_CLASS } from '@/types/blog';
 
 export default function BlogPostLoading() {
   return (
@@ -15,7 +16,7 @@ export default function BlogPostLoading() {
               <div className="h-14 w-40 animate-pulse rounded-lg bg-white/10" />
             </div>
           </div>
-          <div className="mt-10 aspect-[21/9] max-w-5xl animate-pulse rounded-3xl bg-white/10" />
+          <div className={`mt-10 ${BLOG_COVER_ASPECT_CLASS} max-w-5xl animate-pulse rounded-3xl bg-white/10`} />
           <div className="mt-12 grid gap-4 lg:grid-cols-[1fr_260px]">
             <div className="space-y-4">
               <div className="h-4 w-full animate-pulse rounded bg-white/10" />
