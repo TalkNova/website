@@ -22,6 +22,11 @@ const nextConfig: NextConfig = {
         hostname: 'thatmatters.s3.ap-south-1.amazonaws.com',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 's3.ap-south-2.amazonaws.com',
+        pathname: '/**',
+      },
     ],
   },
   devIndicators: {
