@@ -118,7 +118,7 @@ export function LandingFooter() {
             </h4>
             <div className="mt-4 flex gap-3">
               <a
-                href="#"
+                href="https://x.com/thatmatters_ai"
                 className={cn(
                   "rounded-lg border p-2.5 transition",
                   theme === 'dark'
@@ -130,7 +130,7 @@ export function LandingFooter() {
                 <IconX className="h-5 w-5" />
               </a>
               <a
-                href="#"
+                href="https://www.linkedin.com/in/thatmatters-ai"
                 className={cn(
                   "rounded-lg border p-2.5 transition",
                   theme === 'dark'
